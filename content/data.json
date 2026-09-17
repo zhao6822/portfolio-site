@@ -1,0 +1,693 @@
+{
+  "profile": {
+    "name": "陈屿",
+    "title": "视频剪辑师 / 后期导演",
+    "tagline": "把素材剪成节奏，把节奏剪成情绪。",
+    "bio": "7 年商业视频后期经验，服务过汽车、运动、美妆、家电等行业的品牌客户。擅长从大量素材中找出结构，在品牌要求与视听节奏之间找到平衡点；从剪辑、调色到声音设计可以独立完成整条后期链路。",
+    "location": "上海",
+    "years": "7 年",
+    "email": "chenyu@example.com",
+    "phone": "138-0000-0000",
+    "wechat": "chenyu_edit",
+    "showreel": {
+      "title": "2025 个人 Showreel",
+      "subtitle": "商业广告 / 品牌内容 / 纪录片 精选片段",
+      "duration": "2:10",
+      "cover": "assets/covers/showreel.jpg",
+      "hint": "点击封面播放",
+      "video": {
+        "type": "iframe",
+        "url": "https://player.bilibili.com/player.html?bvid=BV1xx411c7mD&autoplay=1"
+      }
+    },
+    "strengths": [
+      {
+        "title": "商业广告剪辑",
+        "desc": "15s / 30s TVC 与信息流版本，擅长在极短时长内明确卖点与情绪落点。"
+      },
+      {
+        "title": "品牌故事片",
+        "desc": "3-5 分钟品牌内容，用叙事结构承载品牌主张，兼顾传播性与品牌调性。"
+      },
+      {
+        "title": "电商短视频",
+        "desc": "主图视频与详情页视频，以转化为导向，节奏紧凑、卖点前置、静音可读。"
+      },
+      {
+        "title": "纪录片式剪辑",
+        "desc": "长素材结构梳理与访谈剪辑，擅长在真实素材里找到情绪线。"
+      },
+      {
+        "title": "MV 与混剪",
+        "desc": "音乐卡点、情绪起伏与画面重复的设计，节奏与画面对位处理。"
+      },
+      {
+        "title": "调色与声音设计",
+        "desc": "DaVinci 调色与 Audition 声音设计，不外包也能达到交付标准。"
+      }
+    ],
+    "software": [
+      {
+        "group": "剪辑",
+        "items": [
+          "Adobe Premiere Pro",
+          "DaVinci Resolve",
+          "Final Cut Pro",
+          "Avid Media Composer"
+        ]
+      },
+      {
+        "group": "调色",
+        "items": [
+          "DaVinci Resolve",
+          "Lumetri Color",
+          "FilmConvert"
+        ]
+      },
+      {
+        "group": "声音",
+        "items": [
+          "Adobe Audition",
+          "iZotope RX",
+          "Pro Tools（基础）"
+        ]
+      },
+      {
+        "group": "动效与包装",
+        "items": [
+          "After Effects",
+          "Photoshop",
+          "Illustrator"
+        ]
+      },
+      {
+        "group": "协作与交付",
+        "items": [
+          "Frame.io",
+          "ftrack",
+          "DaVinci 协作流程",
+          "ProRes / H.264 多规格输出"
+        ]
+      }
+    ],
+    "brands": [
+      "蔚蓝汽车",
+      "燃力运动饮料",
+      "晴山护肤",
+      "客家电",
+      "见山户外",
+      "城市文旅局",
+      "回声室乐队",
+      "星野科技",
+      "拾光咖啡",
+      "宜居家居",
+      "云牧乳业",
+      "野行户外"
+    ],
+    "workflow": [
+      {
+        "title": "需求对齐",
+        "desc": "明确片长、投放平台、受众与交付节点，确认参考片与品牌调性。"
+      },
+      {
+        "title": "素材整理",
+        "desc": "转码与代理生成、多机位同步，按场景与镜头挑选并标注可用素材。"
+      },
+      {
+        "title": "粗剪结构",
+        "desc": "先搭叙事骨架与情绪曲线，15s / 30s 等短版本在此结构上收敛。"
+      },
+      {
+        "title": "精剪节奏",
+        "desc": "逐帧调整切点、留白与转场，配合音乐节拍打磨全片节奏。"
+      },
+      {
+        "title": "调色与声音",
+        "desc": "一级校色统一影调、二级突出主体；对白降噪、音乐与音效铺底。"
+      },
+      {
+        "title": "包装与交付",
+        "desc": "字幕、logo 演绎与版式包装，按各平台安全区输出多规格版本。"
+      }
+    ],
+    "links": [
+      {
+        "label": "B站主页",
+        "url": "https://space.bilibili.com/example"
+      },
+      {
+        "label": "作品集（Vimeo）",
+        "url": "https://vimeo.com/example"
+      }
+    ]
+  },
+  "categories": [
+    "商业广告",
+    "品牌内容",
+    "电商",
+    "短视频",
+    "纪录片",
+    "MV",
+    "混剪"
+  ],
+  "works": [
+    {
+      "id": "auto-brand-film-north",
+      "title": "《向北》品牌年度形象片",
+      "client": "蔚蓝汽车",
+      "category": "商业广告",
+      "deliveredAt": "2025-08",
+      "duration": "1:30",
+      "roles": [
+        "剪辑",
+        "调色"
+      ],
+      "software": [
+        "Premiere Pro",
+        "DaVinci Resolve",
+        "After Effects"
+      ],
+      "cover": "assets/covers/auto-brand-film-north.jpg",
+      "video": {
+        "type": "iframe",
+        "url": "https://player.bilibili.com/player.html?bvid=BV1xx411c7mD&autoplay=1"
+      },
+      "summary": "完成品牌年度形象片的剪辑与调色，成片在发布会首播，三个月全网播放超 320 万。",
+      "background": "客户年度品牌形象片，素材来自 6 天跨 3 座城市的拍摄，累计 4.2TB、约 9 小时素材。要求成片既有产品质感，也要保留真实人物情绪；交付窗口只有 10 天，并需额外产出 60s 与 15s 两个版本。",
+      "approach": [
+        "先把 9 小时素材按「人物 / 产品 / 环境」三类建立标记体系，结合场记表做粗筛，把可用素材压缩到 40 分钟。",
+        "放弃按拍摄时间线性叙事，改用「出发—受阻—抵达」的三段式结构，把最有力量的产品镜头放在情绪高点之后，避免开篇就堆参数。",
+        "对白与旁白段落留足呼吸空间，音乐段落用更碎的切点推进，形成疏密对比。",
+        "在 DaVinci 中统一三座城市的影调（北方段冷调、日光段暖调），并针对发布会大屏单独输出高码率版本。"
+      ],
+      "results": [
+        {
+          "label": "全网播放量",
+          "value": "320 万+"
+        },
+        {
+          "label": "交付版本",
+          "value": "90s / 60s / 15s"
+        },
+        {
+          "label": "客户后续合作",
+          "value": "追加 2 个项目"
+        },
+        {
+          "label": "项目周期",
+          "value": "10 天交付"
+        }
+      ],
+      "links": [
+        {
+          "label": "成片链接（示例）",
+          "url": "https://example.com/work/auto-brand-film-north"
+        }
+      ]
+    },
+    {
+      "id": "energy-drink-tvc",
+      "title": "燃力运动饮料 15s 信息流 TVC",
+      "client": "燃力运动饮料",
+      "category": "商业广告",
+      "deliveredAt": "2025-06",
+      "duration": "0:15",
+      "roles": [
+        "剪辑",
+        "动效包装"
+      ],
+      "software": [
+        "Premiere Pro",
+        "After Effects"
+      ],
+      "cover": "assets/covers/energy-drink-tvc.jpg",
+      "video": {
+        "type": "iframe",
+        "url": "https://player.bilibili.com/player.html?bvid=BV1xx411c7mE&autoplay=1"
+      },
+      "summary": "两周内完成 15 秒 TVC 的剪辑与包装，投放期完播率高于行业均值 40%。",
+      "background": "客户需要在两周内产出一支面向短视频平台投放的 15 秒 TVC，核心卖点只有「0 糖 + 快速补水」，要求前 3 秒必须抓住注意力，并提供竖版与方形两个规格。",
+      "approach": [
+        "把最强的动作镜头放在第 1 帧，用高速摄影的液体飞溅作为钩子，避免任何铺垫。",
+        "卖点字幕与动作同步出现，用动效把参数视觉化：0 糖用数字动画，补水用水流变形演绎。",
+        "输出 9:16 与 1:1 两个版本，单独检查平台安全区，保证字幕不被界面元素遮挡。",
+        "音效层单独设计开瓶、气泡、吞咽三个标志音，强化静音环境下的记忆点。"
+      ],
+      "results": [
+        {
+          "label": "完播率",
+          "value": "高于行业均值 40%"
+        },
+        {
+          "label": "投放期曝光",
+          "value": "1,200 万+"
+        },
+        {
+          "label": "追加版本",
+          "value": "2 条系列片"
+        },
+        {
+          "label": "交付周期",
+          "value": "14 天"
+        }
+      ],
+      "links": [
+        {
+          "label": "投放版成片（示例）",
+          "url": "https://example.com/work/energy-drink-tvc"
+        }
+      ]
+    },
+    {
+      "id": "skincare-brand-doc",
+      "title": "《时间的配方》品牌故事片",
+      "client": "晴山护肤",
+      "category": "品牌内容",
+      "deliveredAt": "2025-04",
+      "duration": "4:20",
+      "roles": [
+        "剪辑",
+        "声音设计"
+      ],
+      "software": [
+        "Premiere Pro",
+        "DaVinci Resolve",
+        "Audition"
+      ],
+      "cover": "assets/covers/skincare-brand-doc.jpg",
+      "video": {
+        "type": "iframe",
+        "url": "https://player.vimeo.com/video/000000001"
+      },
+      "summary": "把 18 小时访谈与工厂素材剪成 4 分钟品牌故事片，成为客户全年品牌沟通主素材。",
+      "background": "品牌成立 20 周年，客户希望讲清「原料与时间」的主张，但提供的素材以长访谈与工厂纪实为主，缺少强视觉冲击的画面，初剪版本因信息堆叠而显得平淡。",
+      "approach": [
+        "从 18 小时访谈里提炼出三句能支撑品牌主张的原话，作为全片的结构支点，其余内容围绕支点取舍。",
+        "用工序细节特写承接访谈情绪，把慢节奏画面与受访者的停顿对齐，形成呼吸感。",
+        "声音上做环境音层次：车间机械底噪压低 12dB，关键工序声单独放大，配合访谈做空间感。",
+        "全片只做一级校色加局部提亮，保留原料与手部肤色的真实质感。"
+      ],
+      "results": [
+        {
+          "label": "品牌渠道播放量",
+          "value": "86 万"
+        },
+        {
+          "label": "客户使用场景",
+          "value": "全渠道 + 内部培训"
+        },
+        {
+          "label": "合作延续",
+          "value": "年度框架续签"
+        },
+        {
+          "label": "成片时长",
+          "value": "4 分 20 秒"
+        }
+      ],
+      "links": [
+        {
+          "label": "品牌片链接（示例）",
+          "url": "https://example.com/work/skincare-brand-doc"
+        }
+      ]
+    },
+    {
+      "id": "home-appliance-618",
+      "title": "客家电 618 主图与详情页视频",
+      "client": "客家电",
+      "category": "电商",
+      "deliveredAt": "2025-03",
+      "duration": "0:45 / 条",
+      "roles": [
+        "剪辑",
+        "调色",
+        "动效包装"
+      ],
+      "software": [
+        "Premiere Pro",
+        "After Effects",
+        "DaVinci Resolve"
+      ],
+      "cover": "assets/covers/home-appliance-618.jpg",
+      "video": {
+        "type": "iframe",
+        "url": "https://player.bilibili.com/player.html?bvid=BV1xx411c7mF&autoplay=1"
+      },
+      "summary": "为 6 款主推产品产出 12 条主图与详情页视频，视频完播率提升 27%。",
+      "background": "618 大促前客户需要为 6 款主推产品更新主图视频与详情页视频，要求风格统一、便于批量替换，并且要在 10 个工作日内完成 12 条交付。",
+      "approach": [
+        "建立统一模板工程：固定「3 秒产品亮相 + 功能演示 + 权益收尾」结构，替换素材即可批量产出。",
+        "所有功能点用动效标注，确保观众在静音播放环境下也能读懂卖点。",
+        "静音优先设计：信息全部由字幕与动效承载，配音只作补充，避免无声场景失效。",
+        "交付时附带工程模板与素材命名规范，客户内部团队可自行替换下一批产品。"
+      ],
+      "results": [
+        {
+          "label": "视频完播率",
+          "value": "+27%"
+        },
+        {
+          "label": "交付数量",
+          "value": "12 条 / 6 款产品"
+        },
+        {
+          "label": "交付周期",
+          "value": "10 天（原计划 15 天）"
+        },
+        {
+          "label": "大促首日转化",
+          "value": "+12%"
+        }
+      ],
+      "links": [
+        {
+          "label": "主图视频（示例）",
+          "url": "https://example.com/work/home-appliance-618"
+        }
+      ]
+    },
+    {
+      "id": "coffee-short-video",
+      "title": "拾光咖啡抖音账号季度内容",
+      "client": "拾光咖啡",
+      "category": "短视频",
+      "deliveredAt": "2024-12",
+      "duration": "0:30 - 1:00 / 条",
+      "roles": [
+        "剪辑",
+        "调色"
+      ],
+      "software": [
+        "Premiere Pro",
+        "DaVinci Resolve"
+      ],
+      "cover": "assets/covers/coffee-short-video.jpg",
+      "video": {
+        "type": "iframe",
+        "url": "https://player.bilibili.com/player.html?bvid=BV1xx411c7mG&autoplay=1"
+      },
+      "summary": "连续 3 个月负责账号视频剪辑，季度内涨粉 4.6 万，单条最高播放 280 万。",
+      "background": "区域连锁咖啡品牌希望用短视频做门店引流，但账号此前内容零散、节奏拖沓，缺少可识别的统一风格，前 3 秒留不住人。",
+      "approach": [
+        "统一前 3 秒钩子公式：门店场景加一个反常识动作，全季度保持一致的视觉与节奏风格。",
+        "建立素材复用库，把店内固定镜头分组编号，单条视频平均剪辑耗时从 3 小时降到 50 分钟。",
+        "依据后台数据回流调整节奏，观看完成率偏低的视频类型统一压缩到 20 秒以内。",
+        "每两周输出一份数据小结，把有效元素沉淀成脚本模板供门店复用。"
+      ],
+      "results": [
+        {
+          "label": "季度涨粉",
+          "value": "4.6 万"
+        },
+        {
+          "label": "单条最高播放",
+          "value": "280 万"
+        },
+        {
+          "label": "到店核销",
+          "value": "+65%"
+        },
+        {
+          "label": "单条制作耗时",
+          "value": "3 小时 → 50 分钟"
+        }
+      ],
+      "links": [
+        {
+          "label": "账号主页（示例）",
+          "url": "https://example.com/work/coffee-short-video"
+        }
+      ]
+    },
+    {
+      "id": "mountain-documentary",
+      "title": "纪录短片《山与人》",
+      "client": "独立制片 / 见山户外",
+      "category": "纪录片",
+      "deliveredAt": "2024-09",
+      "duration": "12:40",
+      "roles": [
+        "剪辑",
+        "声音设计",
+        "调色"
+      ],
+      "software": [
+        "Premiere Pro",
+        "Audition",
+        "DaVinci Resolve"
+      ],
+      "cover": "assets/covers/mountain-documentary.jpg",
+      "video": {
+        "type": "iframe",
+        "url": "https://player.vimeo.com/video/000000002"
+      },
+      "summary": "完成 26 小时素材到 12 分钟成片的结构重建，短片入围两个国内纪录片展映单元。",
+      "background": "导演随队拍摄高原徒步 12 天，素材约 26 小时，但缺少明确事件冲突，第一版 22 分钟的粗剪结构松散，观众在中段流失明显。",
+      "approach": [
+        "放弃线性时间结构，改用「三个夜晚的营地对话」作为章节骨架，让谈话内容承担叙事推进。",
+        "把自然环境音（风声、水声、脚步）当作段落分隔符，替代转场效果，避免剪辑感过重。",
+        "对访谈做删减与重组，把最关键的两段判断分别放在开头与结尾，形成呼应。",
+        "调色保留高原强对比的自然光感，只做一级校色与局部提亮，不做风格化处理。"
+      ],
+      "results": [
+        {
+          "label": "入围展映单元",
+          "value": "2 个"
+        },
+        {
+          "label": "成片时长",
+          "value": "22 分钟 → 12 分 40 秒"
+        },
+        {
+          "label": "素材量",
+          "value": "约 26 小时"
+        },
+        {
+          "label": "展映反馈",
+          "value": "现场 Q&A 入选"
+        }
+      ],
+      "links": [
+        {
+          "label": "片花（示例）",
+          "url": "https://example.com/work/mountain-documentary"
+        }
+      ]
+    },
+    {
+      "id": "echo-room-mv",
+      "title": "回声室乐队《循环》MV",
+      "client": "回声室乐队",
+      "category": "MV",
+      "deliveredAt": "2024-06",
+      "duration": "3:50",
+      "roles": [
+        "剪辑",
+        "动效包装"
+      ],
+      "software": [
+        "Premiere Pro",
+        "After Effects"
+      ],
+      "cover": "assets/covers/echo-room-mv.jpg",
+      "video": {
+        "type": "iframe",
+        "url": "https://music.163.com/outchain/player?type=0&id=0000000"
+      },
+      "summary": "低成本单日拍摄的 MV 剪辑，用卡点与画面重复制造循环感，上线首周播放破 50 万。",
+      "background": "拍摄仅一天完成，可用素材约 3 小时且场景单一；客户希望 MV 能呈现「循环、被困住」的听感，预算不允许补拍或复杂特效。",
+      "approach": [
+        "让同一组镜头反复出现但改变切点位置，制造熟悉又错位的观感，用有限的素材建立结构。",
+        "副歌段落逐帧卡点，主歌段落刻意让切点晚于鼓点半拍，形成情绪推进的对比。",
+        "加入胶片颗粒、轻微位移与色散动效，弥补场地美术与灯光的不足。",
+        "结尾回到开场镜头，但在同一帧上做色调反转，完成循环的收尾。"
+      ],
+      "results": [
+        {
+          "label": "首周播放",
+          "value": "50 万+"
+        },
+        {
+          "label": "自媒体转载",
+          "value": "3 家音乐号"
+        },
+        {
+          "label": "后续合作",
+          "value": "2 支单曲 MV"
+        },
+        {
+          "label": "拍摄素材",
+          "value": "约 3 小时"
+        }
+      ],
+      "links": [
+        {
+          "label": "MV 链接（示例）",
+          "url": "https://example.com/work/echo-room-mv"
+        }
+      ]
+    },
+    {
+      "id": "city-tourism-mashup",
+      "title": "城市文旅年度开场混剪",
+      "client": "城市文旅局",
+      "category": "混剪",
+      "deliveredAt": "2024-03",
+      "duration": "2:30",
+      "roles": [
+        "剪辑",
+        "调色",
+        "声音设计"
+      ],
+      "software": [
+        "Premiere Pro",
+        "DaVinci Resolve",
+        "Audition"
+      ],
+      "cover": "assets/covers/city-tourism-mashup.jpg",
+      "video": {
+        "type": "iframe",
+        "url": "https://player.bilibili.com/player.html?bvid=BV1xx411c7mH&autoplay=1"
+      },
+      "summary": "整合 40 余位摄影师的投稿素材完成年度混剪，作为文旅大会开场片在 500 人现场播放。",
+      "background": "素材来自 40 多位摄影师投稿，规格、色彩、帧率均不统一，需要在 5 天内产出用于大会主屏的版本，并保证画面在大屏上不出现明显的质量断层。",
+      "approach": [
+        "统一转码到同一时间基（25fps / 4K / ProRes 代理），并对全部素材先做统一的色彩基础校正。",
+        "按「晨—日—夜—雨」的光线变化组织段落，用光线本身推进时间感，弱化素材风格差异。",
+        "先定音乐结构与段落峰值，再按峰值分配画面强度，避免出现画面比音乐更满的段落。",
+        "针对主屏比例单独做安全区调整，字幕与关键画面避开屏幕边缘的物理遮挡区域。"
+      ],
+      "results": [
+        {
+          "label": "现场播放",
+          "value": "500 人大会主屏"
+        },
+        {
+          "label": "话题曝光",
+          "value": "500 万+"
+        },
+        {
+          "label": "二次发布",
+          "value": "6 个官方账号"
+        },
+        {
+          "label": "素材来源",
+          "value": "40+ 位摄影师"
+        }
+      ],
+      "links": [
+        {
+          "label": "混剪成片（示例）",
+          "url": "https://example.com/work/city-tourism-mashup"
+        }
+      ]
+    },
+    {
+      "id": "tech-launch-opener",
+      "title": "星野科技发布会开场片",
+      "client": "星野科技",
+      "category": "品牌内容",
+      "deliveredAt": "2023-12",
+      "duration": "1:45",
+      "roles": [
+        "剪辑",
+        "动效包装"
+      ],
+      "software": [
+        "Premiere Pro",
+        "After Effects",
+        "Photoshop"
+      ],
+      "cover": "assets/covers/tech-launch-opener.jpg",
+      "video": {
+        "type": "file",
+        "url": "assets/videos/tech-launch-opener.mp4"
+      },
+      "summary": "完成发布会开场片的剪辑与动效包装，抽象技术指标视觉化，成为客户后续发布会模板。",
+      "background": "新品发布会需要一支 105 秒的开场片，把产品参数与公司技术积累压缩进两分钟内，并要适配主舞台 32:9 的超宽大屏。",
+      "approach": [
+        "先写信息脚本再剪画面，确保每个卖点都有对应的镜头与动效落点，不出现无意义空镜。",
+        "用动效把抽象技术指标可视化（算力、功耗、响应速度），让参数在无解说的情况下也能被理解。",
+        "针对 32:9 舞台大屏单独做版式适配，字幕与 logo 全部重排，避免在超宽画幅下失衡。",
+        "音乐与动效同步对齐三次关键节点，把产品亮相与音乐重拍绑定，强化现场记忆点。"
+      ],
+      "results": [
+        {
+          "label": "内部评审",
+          "value": "一次通过"
+        },
+        {
+          "label": "画幅适配",
+          "value": "32:9 / 16:9 两版"
+        },
+        {
+          "label": "模板复用",
+          "value": "客户后续 2 场发布会"
+        },
+        {
+          "label": "成片时长",
+          "value": "1 分 45 秒"
+        }
+      ],
+      "links": [
+        {
+          "label": "开场片说明（示例）",
+          "url": "https://example.com/work/tech-launch-opener"
+        }
+      ]
+    },
+    {
+      "id": "beauty-double11-video",
+      "title": "美妆品牌双 11 种草短视频",
+      "client": "晴山护肤",
+      "category": "电商",
+      "deliveredAt": "2023-09",
+      "duration": "0:20 - 0:40 / 条",
+      "roles": [
+        "剪辑"
+      ],
+      "software": [
+        "Premiere Pro",
+        "After Effects"
+      ],
+      "cover": "assets/covers/beauty-double11-video.jpg",
+      "video": {
+        "type": "file",
+        "url": "assets/videos/beauty-double11-video.mp4"
+      },
+      "summary": "两周内产出 30 条种草短视频，投放后账户 ROI 高于均值 1.8 倍。",
+      "background": "双 11 期间客户需要大量素材做投放测试，要求同一产品产出多组「不同开场 + 不同卖点排序」的版本，用于快速筛选有效元素。",
+      "approach": [
+        "把脚本拆成「开场钩子 / 使用过程 / 效果对比 / 行动引导」四个模块，模块化组合批量产出。",
+        "为每组版本记录差异点并编号，投放团队可以按数据直接判断哪一类元素有效。",
+        "统一字幕样式与音效包，降低观众对广告内容的陌生感，也缩短单条制作时间。",
+        "保留最佳版本工程文件，次年大促直接复用结构、替换素材。"
+      ],
+      "results": [
+        {
+          "label": "交付数量",
+          "value": "30 条 / 2 周"
+        },
+        {
+          "label": "投放 ROI",
+          "value": "高于账户均值 1.8 倍"
+        },
+        {
+          "label": "最佳版本复用",
+          "value": "次年大促沿用"
+        },
+        {
+          "label": "测试维度",
+          "value": "开场 / 卖点排序"
+        }
+      ],
+      "links": [
+        {
+          "label": "种草视频（示例）",
+          "url": "https://example.com/work/beauty-double11-video"
+        }
+      ]
+    }
+  ]
+}

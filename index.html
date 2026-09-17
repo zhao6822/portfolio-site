@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>视频剪辑作品集 | 首页</title>
+<meta name="description" content="视频剪辑师个人作品集：商业广告、品牌内容、电商短视频、纪录片、MV 与混剪作品。">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="home">
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-mark" id="brandMark"></span>
+      <span id="brandName">作品集</span>
+      <span class="brand-sub" id="brandPage">Showreel</span>
+    </a>
+    <button type="button" class="nav-toggle" id="navToggle" aria-expanded="false">菜单</button>
+    <nav class="site-nav" id="siteNav">
+      <a class="active" href="index.html">首页</a>
+      <a href="timeline.html">时间线</a>
+      <a href="about.html">关于</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- Showreel 主视觉 -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="hero-copy" id="heroCopy"></div>
+      <div class="hero-media" id="heroMedia"></div>
+    </div>
+  </section>
+
+  <!-- 作品类型筛选 + 作品网格 -->
+  <section class="container section" id="works">
+    <div class="section-head">
+      <h2>作品精选</h2>
+      <p id="workCount">按类型筛选作品</p>
+    </div>
+    <div class="filter-bar" id="filterBar"></div>
+    <div class="work-grid" id="workGrid"></div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <span id="footerText"></span>
+    <span>视频剪辑 / 调色 / 声音设计</span>
+  </div>
+</footer>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/site.js"></script>
+</body>
+</html>

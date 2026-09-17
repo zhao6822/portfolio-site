@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- 后台页面不要被搜索引擎收录 -->
+  <meta name="robots" content="noindex, nofollow" />
+  <title>内容后台 · 作品集</title>
+</head>
+<body>
+  <!--
+    =====================================================================
+     Decap CMS 后台入口（访问 https://你的域名/admin/ 打开）
+    ---------------------------------------------------------------------
+     · 页面加载 Decap CMS 官方 CDN 资源，配置读取同目录的 config.yml。
+     · config.yml 中的 repo / branch / base_url 必须替换为自己的信息，
+       否则登录会失败（详见项目根目录 README.md「后台编辑与部署」）。
+     · 界面语言设为简体中文（zh_Hans）；如加载后仍显示英文，说明对应
+       语言包未取到，此时界面为英文但功能不受影响。
+    =====================================================================
+  -->
+  <script>
+    /* 关闭自动初始化，改由下方手动初始化并注入中文界面配置 */
+    window.CMS_MANUAL_INIT = true;
+  </script>
+  <script src="https://unpkg.com/decap-cms@^3.3.3/dist/decap-cms.js"></script>
+  <script>
+    CMS.init({
+      config: {
+        locale: "zh_Hans" // 中文（简体）界面
+      }
+    });
+  </script>
+</body>
+</html>

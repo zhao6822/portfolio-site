@@ -1,0 +1,195 @@
+# =====================================================================
+#  Decap CMS 配置 · 站内 Git 后台编辑
+# ---------------------------------------------------------------------
+#  使用前请把本文件中所有【…】占位符替换为自己的真实信息。
+#  替换完成并推送到 GitHub 后，访问 https://你的域名/admin/ 即可登录编辑。
+#  详细步骤见项目根目录 README.md 的「后台编辑与部署」章节。
+# =====================================================================
+
+backend:
+  name: github
+  # 已配置：你的 GitHub 仓库，格式为 用户名/仓库名（区分大小写）
+  repo: "zhao6822/portfolio-site"
+  # 已配置：站点部署所用分支，Cloudflare Pages 监听的通常就是 main
+  branch: "main"
+  # 已配置：站点正式访问域名，结尾不要带斜杠
+  # 注意：若 Cloudflare Pages 分配的项目名不是 portfolio-site，请把下面改成实际的 xxx.pages.dev
+  base_url: "https://portfolio-site.pages.dev"
+  # 登录中转接口，固定写法，对应 functions/api/auth.js，无需修改
+  auth_endpoint: "/api/auth"
+
+# 后台界面语言：简体中文（zh_Hans）；如仍显示英文，可改为 en 或用默认
+locale: zh_Hans
+
+# 图片等媒体文件：上传后存放在仓库的 assets/uploads 目录，
+# 写入内容里的路径使用相对路径，保证本地双击预览（file://）与线上都能显示。
+media_folder: "assets/uploads"
+public_folder: "assets/uploads"
+
+# ---------------------------------------------------------------------
+#  内容集合：本站所有内容都集中在 content/data.json 这一个文件里，
+#  因此使用「单文件（files）」结构，而不是文件夹（folder）结构。
+#  注意：保存时会按下面的 fields 重建该文件，所以字段需与 JSON 完全对应。
+# ---------------------------------------------------------------------
+collections:
+  - name: site
+    label: 站点内容
+    label_singular: 站点内容
+    description: >-
+      修改后点击「保存」即自动提交到 GitHub，Cloudflare Pages 会自动重新构建
+      （执行 node build.js 生成 assets/js/data.js）并发布，通常 1 分钟内生效。
+    delete: false
+    files:
+      - name: data
+        label: 全站数据（个人信息 / Showreel / 作品列表）
+        file: content/data.json
+        fields:
+          # ============ 个人信息与主页内容 ============
+          - label: 个人信息
+            name: profile
+            widget: object
+            fields:
+              - { label: 姓名, name: name, widget: string }
+              - { label: 职业头衔, name: title, widget: string }
+              - { label: 一句话主张, name: tagline, widget: string }
+              - { label: 个人简介, name: bio, widget: text }
+              - { label: 所在城市, name: location, widget: string }
+              - { label: 从业年限, name: years, widget: string }
+              - { label: 邮箱, name: email, widget: string, required: false }
+              - { label: 电话, name: phone, widget: string, required: false }
+              - { label: 微信号, name: wechat, widget: string, required: false }
+
+              - label: 首页 Showreel（主视觉视频）
+                name: showreel
+                widget: object
+                fields:
+                  - { label: 标题, name: title, widget: string }
+                  - { label: 副标题, name: subtitle, widget: string }
+                  - { label: 片长, name: duration, widget: string }
+                  - { label: 封面图（留空则显示渐变占位）, name: cover, widget: image, required: false, hint: "建议上传到 assets/covers/ 或 assets/uploads/，尺寸 16:9" }
+                  - { label: 封面提示文字, name: hint, widget: string, required: false }
+                  - label: 播放源
+                    name: video
+                    widget: object
+                    fields:
+                      - label: 播放方式
+                        name: type
+                        widget: select
+                        options:
+                          - { label: 外链嵌播（B站 / Vimeo / YouTube）, value: iframe }
+                          - { label: 本站视频文件（assets/videos 下的 mp4）, value: file }
+                        hint: "选 iframe 时填嵌播地址；选 file 时填 assets/videos/xxx.mp4"
+                      - { label: 视频地址, name: url, widget: string }
+
+              - label: 擅长方向与风格
+                name: strengths
+                widget: list
+                label_singular: 擅长方向
+                summary: "{{fields.title}}"
+                fields:
+                  - { label: 方向名称, name: title, widget: string }
+                  - { label: 说明, name: desc, widget: text }
+
+              - label: 软件与工具
+                name: software
+                widget: list
+                label_singular: 软件分组
+                summary: "{{fields.group}}"
+                fields:
+                  - { label: 分组名称, name: group, widget: string }
+                  - label: 软件列表
+                    name: items
+                    widget: list
+                    label_singular: 软件
+                    field: { label: 软件名称, name: item, widget: string }
+
+              - label: 合作品牌 / 客户
+                name: brands
+                widget: list
+                label_singular: 品牌
+                field: { label: 品牌名称, name: brand, widget: string }
+
+              - label: 工作流程
+                name: workflow
+                widget: list
+                label_singular: 流程步骤
+                summary: "{{fields.title}}"
+                fields:
+                  - { label: 步骤名称, name: title, widget: string }
+                  - { label: 说明, name: desc, widget: text }
+
+              - label: 联系方式 / 外部链接
+                name: links
+                widget: list
+                label_singular: 链接
+                summary: "{{fields.label}}"
+                fields:
+                  - { label: 链接名称, name: label, widget: string }
+                  - { label: 链接地址, name: url, widget: string }
+
+          # ============ 作品类型（用于首页/时间线的筛选按钮） ============
+          - label: 作品类型（筛选分类）
+            name: categories
+            widget: list
+            label_singular: 作品类型
+            hint: 这里的名称需与下方作品的「作品类型」字段保持一致，否则筛选取不到
+            field: { label: 类型名称, name: category, widget: string }
+
+          # ============ 作品列表 ============
+          - label: 作品列表
+            name: works
+            widget: list
+            label_singular: 作品
+            summary: "{{fields.title}} · {{fields.client}}"
+            fields:
+              - { label: 作品 ID（英文短横线命名，唯一，勿重复）, name: id, widget: string }
+              - { label: 作品标题, name: title, widget: string }
+              - { label: 客户 / 品牌, name: client, widget: string }
+              - { label: 作品类型, name: category, widget: string, hint: "填写上方作品类型中的一个，如：商业广告" }
+              - { label: 交付时间（格式 YYYY-MM，如 2025-06）, name: deliveredAt, widget: string, hint: "统一格式 YYYY-MM，时间线按此倒序排列" }
+              - { label: 成片时长, name: duration, widget: string }
+              - label: 担任角色
+                name: roles
+                widget: list
+                label_singular: 角色
+                field: { label: 角色名称, name: role, widget: string }
+              - label: 使用软件
+                name: software
+                widget: list
+                label_singular: 软件
+                field: { label: 软件名称, name: item, widget: string }
+              - { label: 封面图（留空则显示渐变占位）, name: cover, widget: image, required: false, hint: "建议 16:9，上传到 assets/covers/ 或 assets/uploads/" }
+              - label: 视频播放源
+                name: video
+                widget: object
+                fields:
+                  - label: 播放方式
+                    name: type
+                    widget: select
+                    options:
+                      - { label: 外链嵌播（B站 / Vimeo / YouTube）, value: iframe }
+                      - { label: 本站视频文件（assets/videos 下的 mp4）, value: file }
+                  - { label: 视频地址, name: url, widget: string }
+              - { label: 一句话成果, name: summary, widget: text }
+              - { label: 项目背景, name: background, widget: text }
+              - label: 处理思路
+                name: approach
+                widget: list
+                label_singular: 思路要点
+                field: { label: 要点内容, name: point, widget: text }
+              - label: 成果数据
+                name: results
+                widget: list
+                label_singular: 数据项
+                summary: "{{fields.label}}：{{fields.value}}"
+                fields:
+                  - { label: 指标名称, name: label, widget: string }
+                  - { label: 指标数值, name: value, widget: string }
+              - label: 相关链接
+                name: links
+                widget: list
+                label_singular: 链接
+                summary: "{{fields.label}}"
+                fields:
+                  - { label: 链接名称, name: label, widget: string }
+                  - { label: 链接地址, name: url, widget: string }
