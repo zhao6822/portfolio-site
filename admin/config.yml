@@ -13,8 +13,11 @@ backend:
   # 已配置：站点部署所用分支，Cloudflare Pages 监听的通常就是 main
   branch: "main"
   # 已配置：站点正式访问域名，结尾不要带斜杠
-  # 注意：若 Cloudflare Pages 分配的项目名不是 portfolio-site，请把下面改成实际的 xxx.pages.dev
-  base_url: "https://portfolio-site.pages.dev"
+  # 本项目 Cloudflare Pages 的实际域名。注意：默认的 portfolio-site.pages.dev 子域可能
+  # 已被他人占用，Cloudflare 会自动追加随机后缀——本项目实际分配为：
+  # https://portfolio-site-7i5.pages.dev
+  # 如日后绑定自定义域名，请同步修改此处与 GitHub OAuth App 的 Homepage / 回调地址。
+  base_url: "https://portfolio-site-7i5.pages.dev"
   # 登录中转接口，固定写法，对应 functions/api/auth.js，无需修改
   auth_endpoint: "/api/auth"
 

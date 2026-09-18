@@ -223,8 +223,8 @@ GitHub 右上角头像 → **Settings** → **Developer settings** → **OAuth A
 | 字段 | 填什么 |
 | --- | --- |
 | Application name | 任意，例如 `作品集后台` |
-| Homepage URL | 站点域名，例如 `https://portfolio-site.pages.dev` |
-| Authorization callback URL | **必须是** `https://你的域名/api/callback`（不能填 `/admin`，也不能漏掉 `/api`） |
+| Homepage URL | 站点域名，例如 `https://portfolio-site-7i5.pages.dev` |
+| Authorization callback URL | **必须是** `https://你的域名/api/callback`，本站即 `https://portfolio-site-7i5.pages.dev/api/callback`（不能填 `/admin`，也不能漏掉 `/api`） |
 
 创建后点 **Generate a new client secret**，记下 **Client ID** 与 **Client Secret**（Secret 只显示一次，请立即保存）。
 
@@ -237,7 +237,7 @@ GitHub 右上角头像 → **Settings** → **Developer settings** → **OAuth A
    - **Framework preset**：`None`
    - **Build command**：`node build.js`
    - **Build output directory**：留空（或填 `/`）——站点源文件本身就是发布产物
-3. **Save and Deploy**，约 1 分钟后拿到 `https://xxx.pages.dev`，先确认首页能正常打开。
+3. **Save and Deploy**，约 1 分钟后拿到访问域名（本站实际为 `https://portfolio-site-7i5.pages.dev`——若默认 `portfolio-site.pages.dev` 子域已被占用，Cloudflare 会自动追加随机后缀，以控制台显示为准），先确认首页能正常打开。
 
 ### 6.5 第四步：配置环境变量
 
@@ -252,14 +252,14 @@ Cloudflare Pages 项目 → **Settings** → **Variables and secrets** → **Add
 
 ### 6.6 第五步：填写后台配置
 
-打开 `admin/config.yml`，把三个 `【…】` 占位符换成自己的信息（一处都不要漏）：
+打开 `admin/config.yml`，确认 backend 段三项与实际部署一致（本项目已按实际情况填好，通常无需改动；仅在更换账号 / 仓库 / 域名时才需修改）：
 
 ```yaml
 backend:
   name: github
-  repo: "你的用户名/portfolio-site"              # 仓库，格式：用户名/仓库名
-  branch: "main"                                # 部署分支
-  base_url: "https://portfolio-site.pages.dev"  # 站点域名，结尾不要带斜杠
+  repo: "zhao6822/portfolio-site"                   # 仓库，格式：用户名/仓库名
+  branch: "main"                                    # 部署分支
+  base_url: "https://portfolio-site-7i5.pages.dev"  # 站点域名，结尾不要带斜杠
   auth_endpoint: "/api/auth"
 ```
 
@@ -267,7 +267,7 @@ backend:
 
 ### 6.7 第六步：登录后台编辑（日常使用）
 
-1. 打开 `https://你的域名/admin/`；
+1. 打开 `https://portfolio-site-7i5.pages.dev/admin/`；
 2. 点 **Login with GitHub**，在弹出的 GitHub 页面点 **Authorize**；
 3. 进入后台 → 左侧「站点内容」→「全站数据」，可编辑三块内容：
    - **个人信息**：姓名、头衔、简介、联系方式、Showreel、擅长方向、软件、合作品牌、工作流程、外链；
