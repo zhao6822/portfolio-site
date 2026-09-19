@@ -12,10 +12,13 @@
     =====================================================================
      后台入口（访问 https://portfolio-site-7i5.pages.dev/admin/ 打开）
     ---------------------------------------------------------------------
-     · 由 Decap CMS 迁移为 Sveltia CMS：界面更清爽、中文字体更好、
+     · Sveltia CMS（Decap CMS 的兼容替代）：界面更清爽、中文字体更好、
        表单支持分组折叠与一行摘要，配置项与原 Decap 配置完全兼容。
      · 配置读取同目录的 config.yml；登录仍走 GitHub OAuth，
        即 /api/auth → GitHub → /api/callback，回调地址无需改动。
+     · 重要（勿删）：CDN 脚本采用动态 import() 加载，此时
+       document.currentScript 为 null，Sveltia 的「自动初始化」会被跳过，
+       因此下方必须显式调用 window.CMS.init()，否则页面会全白。
      · 迁移前的原文件已备份在仓库 _legacy-decap-backup/，
        需要退回 Decap CMS 请见该目录下的 README.md。
     =====================================================================
@@ -27,6 +30,14 @@
       "https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js",
       "https://cdn.jsdelivr.net/npm/@sveltia/cms/dist/sveltia-cms.js"
     ];
+
+    function showError(text) {
+      document.body.innerHTML =
+        '<p style="font:16px/1.8 system-ui,-apple-system,Segoe UI,sans-serif;padding:24px;max-width:640px">' +
+        text +
+        "</p>";
+    }
+
     let loaded = false;
     for (const url of CDN_SOURCES) {
       try {
@@ -37,10 +48,21 @@
         console.warn("CMS 资源加载失败，尝试下一个源：", url, err);
       }
     }
+
     if (!loaded) {
-      document.body.innerHTML =
-        '<p style="font:16px/1.8 system-ui,-apple-system,Segoe UI,sans-serif;padding:24px;max-width:640px">' +
-        "后台资源加载失败：请检查网络连接后刷新页面；若持续失败，可先访问站点首页确认网络正常，再联系维护者。</p>";
+      showError("后台资源加载失败：请检查网络连接后刷新页面；若持续失败，可先访问站点首页确认网络正常，再联系维护者。");
+    } else if (!window.CMS || typeof window.CMS.init !== "function") {
+      console.error("未找到 CMS.init，后台无法初始化。");
+      showError("后台脚本已加载但初始化接口缺失，请刷新页面重试；若持续失败，请联系维护者。");
+    } else {
+      // 必须显式初始化：动态 import() 时 document.currentScript 为 null，
+      // Sveltia 不会自动初始化（不渲染任何界面，表现为白屏）。
+      try {
+        window.CMS.init();
+      } catch (err) {
+        console.error("后台初始化失败：", err);
+        showError("后台初始化失败，请刷新页面重试；若持续失败，请把浏览器控制台报错反馈给维护者。");
+      }
     }
   </script>
 </body>
