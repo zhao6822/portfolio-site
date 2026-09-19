@@ -1,16 +1,45 @@
 {
+  "works": [
+    {
+      "title": "（待填写）作品标题",
+      "id": "template-01",
+      "client": "",
+      "category": "",
+      "deliveredAt": "",
+      "duration": "",
+      "roles": [],
+      "software": [],
+      "cover": "",
+      "video": {
+        "type": "",
+        "url": ""
+      },
+      "summary": "",
+      "background": "",
+      "approach": [],
+      "results": [],
+      "links": []
+    }
+  ],
+  "categories": [
+    "Ai短剧",
+    "真人短剧",
+    "纪录片",
+    "预告",
+    "混剪"
+  ],
   "profile": {
-    "name": "陈屿",
+    "name": "abc",
     "title": "视频剪辑师 / 后期导演",
     "tagline": "把素材剪成节奏，把节奏剪成情绪。",
-    "bio": "7 年商业视频后期经验，服务过汽车、运动、美妆、家电等行业的品牌客户。擅长从大量素材中找出结构，在品牌要求与视听节奏之间找到平衡点；从剪辑、调色到声音设计可以独立完成整条后期链路。",
-    "location": "上海",
-    "years": "7 年",
-    "email": "chenyu@example.com",
-    "phone": "138-0000-0000",
-    "wechat": "chenyu_edit",
+    "bio": "2 年商业视频后期经验，服务过的品牌客户。擅长从大量素材中找出结构，在品牌要求与视听节奏之间找到平衡点；从剪辑、调色到声音设计可以独立完成整条后期链路。",
+    "location": "郑州",
+    "years": "2年",
+    "email": "zhaopeng6822@qq.com",
+    "phone": "19293319038",
+    "wechat": "zpp9038",
     "showreel": {
-      "title": "2025 个人 Showreel",
+      "title": "个人记录",
       "subtitle": "商业广告 / 品牌内容 / 纪录片 精选片段",
       "duration": "2:10",
       "cover": "assets/covers/showreel.jpg",
@@ -140,36 +169,5 @@
         "url": "https://vimeo.com/example"
       }
     ]
-  },
-  "categories": [
-    "商业广告",
-    "品牌内容",
-    "电商",
-    "短视频",
-    "纪录片",
-    "MV",
-    "混剪"
-  ],
-  "works": [
-    {
-      "id": "template-01",
-      "title": "（待填写）作品标题",
-      "client": "",
-      "category": "",
-      "deliveredAt": "",
-      "duration": "",
-      "roles": [],
-      "software": [],
-      "cover": "",
-      "video": {
-        "type": "",
-        "url": ""
-      },
-      "summary": "",
-      "background": "",
-      "approach": [],
-      "results": [],
-      "links": []
-    }
-  ]
+  }
 }
