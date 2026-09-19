@@ -1,3 +1,14 @@
+---
+AIGC:
+    Label: "1"
+    ContentProducer: 001191440300708461136T1XGW3
+    ProduceID: 9d28daf1a7d9923eabbd286698e5ff78_769877e9b3df11f185dc525400de85a5
+    ReservedCode1: 3NvxeeY7wJAuj6Q0n7MZGpawB8bfuscjjwO6PLdZrDouyBTxauSN16ixk29zGhoa6kLOLgxDH6kjox71v4lgr2c3EithBOMY5Jqa6+5hahVl8MLl8NHwru9lOA+lxQ7d08yRSG9Z6tbUQNSFyqcotaiQEqrb384W70ROsydP3F2+OkVmc2O7l1bmVGc=
+    ContentPropagator: 001191440300708461136T1XGW3
+    PropagateID: 9d28daf1a7d9923eabbd286698e5ff78_769877e9b3df11f185dc525400de85a5
+    ReservedCode2: 3NvxeeY7wJAuj6Q0n7MZGpawB8bfuscjjwO6PLdZrDouyBTxauSN16ixk29zGhoa6kLOLgxDH6kjox71v4lgr2c3EithBOMY5Jqa6+5hahVl8MLl8NHwru9lOA+lxQ7d08yRSG9Z6tbUQNSFyqcotaiQEqrb384W70ROsydP3F2+OkVmc2O7l1bmVGc=
+---
+
 # 后台回滚说明（Sveltia CMS → Decap CMS）
 
 本目录保存了 **2026-09-19 迁移到 Sveltia CMS 之前**的原始后台文件，用于随时回滚：
@@ -36,3 +47,4 @@ git push origin main
 本次迁移**未改动** `content/data.json`；后台无论用 Decap 还是 Sveltia，
 保存时都按 `admin/config.yml` 的字段声明重建该文件，
 本次迁移保持了全部字段名与嵌套层级不变，因此前端 `build.js` / `site.js` 不受影响。
+*（内容由AI生成，仅供参考）*

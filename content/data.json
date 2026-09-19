@@ -21,6 +21,11 @@
       "links": []
     }
   ],
+  "share": {
+    "title": "赵鹏 · 作品集 — 工作成果记录",
+    "description": "赵鹏的工作成果记录。",
+    "image": "assets/images/og-cover.png"
+  },
   "categories": [
     "Ai短剧",
     "真人短剧",

@@ -10,7 +10,10 @@
 #    前端 build.js / site.js 依赖该结构，请勿改动下面各字段的 name。
 #  · 保存 → 自动提交到 GitHub main 分支 → Cloudflare Pages 自动重新构建
 #    （node build.js 生成 assets/js/data.js）并发布，通常 1 分钟内生效。
-#  · 表单阅读顺序：作品列表（最常用）→ 作品类型 → 个人信息（默认折叠）。
+#  · 表单阅读顺序：作品列表（最常用）→ 分享卡片 → 作品类型 → 个人信息（默认折叠）。
+#  · 分享卡片：控制微信 / 朋友圈 / QQ 转发链接时的标题、描述与缩略图，
+#    由 build.js 在构建时注入各页面 HTML 的 og:title / og:description / og:image；
+#    内页（关于 / 时间线 / 作品详情）各自的标题与描述保持原样，只共用同一张缩略图。
 #  · 需要退回 Decap CMS：见仓库根目录 _legacy-decap-backup/README.md
 # =====================================================================
 
@@ -174,7 +177,34 @@ collections:
                   - { label: 链接名称, name: label, widget: string, required: false, hint: "如：B站成片" }
                   - { label: 链接地址, name: url, widget: string, required: false, hint: "以 https:// 开头的完整网址" }
 
-          # ============ ② 作品类型（首页筛选按钮） ============
+          # ============ ② 分享卡片（微信 / 朋友圈等转发时显示） ============
+          - label: 分享卡片（微信 / 朋友圈等转发时显示）
+            name: share
+            widget: object
+            collapsed: false
+            required: false
+            hint: >-
+              转发站点链接时显示的标题、描述与右侧缩略图。留空的项自动沿用页面自带的默认文案与默认缩略图。
+              改完点「保存」，约 1 分钟后线上生效。微信会缓存已抓取过的卡片，验证时建议用带参数的新链接
+              （如 https://portfolio-site-7i5.pages.dev/?v=2）或在微信里「清空缓存」后再试。
+            fields:
+              - label: 分享标题
+                name: title
+                widget: string
+                required: false
+                hint: "转发卡片上的标题，建议 12-24 字；留空则使用页面默认标题。仅首页链接生效，内页仍显示各页自己的标题"
+              - label: 分享描述
+                name: description
+                widget: text
+                required: false
+                hint: "标题下方的一行说明，建议 16-40 字；留空则使用页面默认描述。仅首页链接生效，内页仍显示各页自己的描述"
+              - label: 分享缩略图
+                name: image
+                widget: image
+                required: false
+                hint: "点「上传」选择本地图片，会自动传到仓库 assets/uploads/ 并自动引用。建议 1200×630 像素（约 1.91:1 的横图）、文件小于 300KB；留空则使用默认图 assets/images/og-cover.png"
+
+          # ============ ③ 作品类型（首页筛选按钮） ============
           - label: 作品类型（首页筛选按钮）
             name: categories
             widget: list
@@ -183,7 +213,7 @@ collections:
             hint: "这里每一项会变成首页的一个筛选按钮，建议不超过 8 个。名称需与每件作品「作品类型」的下拉选项完全一致，否则筛选不到；新增类型时请同时更新本文档 works → category → options"
             field: { label: 类型名称, name: category, widget: string, required: false, hint: "如：商业广告" }
 
-          # ============ ③ 个人信息与主页内容（改动较少，默认折叠） ============
+          # ============ ④ 个人信息与主页内容（改动较少，默认折叠） ============
           - label: 个人信息（姓名 / 简介 / 联系方式）
             name: profile
             widget: object
