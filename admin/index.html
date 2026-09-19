@@ -10,26 +10,38 @@
 <body>
   <!--
     =====================================================================
-     Decap CMS 后台入口（访问 https://你的域名/admin/ 打开）
+     后台入口（访问 https://portfolio-site-7i5.pages.dev/admin/ 打开）
     ---------------------------------------------------------------------
-     · 页面加载 Decap CMS 官方 CDN 资源，配置读取同目录的 config.yml。
-     · config.yml 中的 repo / branch / base_url 必须替换为自己的信息，
-       否则登录会失败（详见项目根目录 README.md「后台编辑与部署」）。
-     · 界面语言设为简体中文（zh_Hans）；如加载后仍显示英文，说明对应
-       语言包未取到，此时界面为英文但功能不受影响。
+     · 由 Decap CMS 迁移为 Sveltia CMS：界面更清爽、中文字体更好、
+       表单支持分组折叠与一行摘要，配置项与原 Decap 配置完全兼容。
+     · 配置读取同目录的 config.yml；登录仍走 GitHub OAuth，
+       即 /api/auth → GitHub → /api/callback，回调地址无需改动。
+     · 迁移前的原文件已备份在仓库 _legacy-decap-backup/，
+       需要退回 Decap CMS 请见该目录下的 README.md。
     =====================================================================
   -->
-  <script>
-    /* 关闭自动初始化，改由下方手动初始化并注入中文界面配置 */
-    window.CMS_MANUAL_INIT = true;
-  </script>
-  <script src="https://unpkg.com/decap-cms@^3.3.3/dist/decap-cms.js"></script>
-  <script>
-    CMS.init({
-      config: {
-        locale: "zh_Hans" // 中文（简体）界面
+  <noscript>本后台需要启用 JavaScript 才能使用，请在浏览器中开启后刷新页面。</noscript>
+  <script type="module">
+    // Sveltia CMS 官方发行文件；主源失败时自动切换备用源，提升加载成功率
+    const CDN_SOURCES = [
+      "https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js",
+      "https://cdn.jsdelivr.net/npm/@sveltia/cms/dist/sveltia-cms.js"
+    ];
+    let loaded = false;
+    for (const url of CDN_SOURCES) {
+      try {
+        await import(url);
+        loaded = true;
+        break;
+      } catch (err) {
+        console.warn("CMS 资源加载失败，尝试下一个源：", url, err);
       }
-    });
+    }
+    if (!loaded) {
+      document.body.innerHTML =
+        '<p style="font:16px/1.8 system-ui,-apple-system,Segoe UI,sans-serif;padding:24px;max-width:640px">' +
+        "后台资源加载失败：请检查网络连接后刷新页面；若持续失败，可先访问站点首页确认网络正常，再联系维护者。</p>";
+    }
   </script>
 </body>
 </html>
