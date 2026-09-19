@@ -13,11 +13,16 @@ AIGC:
 
 # 视频剪辑师个人作品集（零依赖静态站点）
 
+> 🤖 **交给 AI 编程助手维护（Cursor / Claude Code / ChatGPT 等）或需要完整技术交接时，请先读 [AGENTS.md](./AGENTS.md)**：内含数据模型字段表、构建与部署机制、后台 OAuth 原理、约束坑点与当前待办。本 README 侧重人类的日常操作说明。
+
+**线上地址**：<https://portfolio-site-7i5.pages.dev>　|　**仓库**：`zhao6822/portfolio-site`（部署分支 `main`）　|　**后台**：<https://portfolio-site-7i5.pages.dev/admin/>
+
 一个面向**视频剪辑师**的个人作品集网站：首页为 Showreel 主视觉 + 作品类型筛选 + 作品网格，作品详情页支持在线嵌播与本地视频播放，另含作品时间线与关于页。
 
 - **零依赖**：不使用任何框架、CDN、构建工具，全部为原生 HTML / CSS / JavaScript。
 - **零构建**：双击 `index.html` 即可在浏览器中本地预览（`file://` 协议下正常工作）。
 - **单一数据源**：全站内容（个人信息、Showreel、作品列表、擅长方向、软件、品牌、流程）集中在 `content/data.json` 一个文件里，由 `build.js` 编译为 `assets/js/data.js` 供页面读取。
+- **分享卡片可配置**：微信 / 朋友圈 / QQ 转发链接时的标题、描述与缩略图，由数据里的 `share` 分组控制（后台「分享卡片」），构建时注入各页面的 og 标签。
 - **可在线编辑**：部署到 Cloudflare Pages 后访问 `/admin/`，用 GitHub 账号登录即可在网页上改内容，保存即自动发布（见第六节）。
 
 ---
@@ -30,12 +35,15 @@ portfolio-site/
 ├─ timeline.html              时间线：按交付时间倒序的剪辑作品时间轴
 ├─ project.html               作品详情页（通过 project.html?id=<作品 id> 访问）
 ├─ about.html                 关于页：擅长方向 / 软件 / 合作品牌 / 工作流程 / 联系方式
-├─ build.js                   ★ 构建脚本：content/data.json → assets/js/data.js
+├─ build.js                   ★ 构建脚本：content/data.json → assets/js/data.js，并注入四页分享标签
+├─ favicon.ico                站点图标
+├─ AGENTS.md                  ★ 面向 AI 编程工具的技术交接文档（数据模型 / 部署 / 坑点 / 待办）
+├─ README.md                  本文件
 ├─ content/
 │  └─ data.json               ★ 全站唯一数据源（JSON），后台编辑器写入的就是它
 ├─ admin/
 │  ├─ index.html              后台入口（访问 /admin/ 打开）
-│  └─ config.yml              ↳ Decap CMS 配置：仓库 / 分支 / 字段定义
+│  └─ config.yml              ↳ Sveltia CMS 配置：仓库 / 分支 / 域名 / 字段定义
 ├─ functions/api/             ⚙ Cloudflare Pages Functions（仅线上生效）
 │  ├─ auth.js                 登录跳转 GitHub（/api/auth）
 │  └─ callback.js             OAuth 回调并回传 token（/api/callback）
@@ -43,12 +51,13 @@ portfolio-site/
 │  ├─ css/style.css           全站样式（含深色主题与渐变占位封面）
 │  ├─ js/data.js              ⚙ 由 build.js 自动生成，请勿手动编辑
 │  ├─ js/site.js              渲染脚本（按 body[data-page] 分发）
+│  ├─ images/                 站点图标与默认分享图（og-cover.png 1200×630 等）
 │  ├─ covers/                 封面图目录（把你的封面图放这里）
 │  │  └─ README.md            封面图命名规范说明
 │  ├─ uploads/                后台编辑器上传图片的目录（首次上传后自动创建）
 │  └─ videos/                 本地视频目录（用本地 mp4 播放时放这里）
 │     └─ README.md            本地视频说明
-└─ README.md
+└─ _legacy-decap-backup/      迁移前的 Decap CMS 备份（需回退 CMS 时才用）
 ```
 
 页面的路由方式：
@@ -98,6 +107,7 @@ portfolio-site/
 1. `id` 不能重复，且不要包含空格与 `#`、`&` 等符号。
 2. `category` 建议复用 `categories` 里已有的类型；若写了新类型也没关系，首页筛选栏会自动补上这个按钮。
 3. `deliveredAt` 必须是 `YYYY-MM` 格式（如 `2025-07`），时间线依赖它排序与分组。
+4. 新增类型时请三处保持完全一致：作品的 `category`、`categories` 数组、`admin/config.yml` 中 `works → category → options` 下拉选项（当前实际类型为 `Ai短剧 / 真人短剧 / 纪录片 / 预告 / 混剪`，与上面示例代码里的旧分类不同）。
 
 ### 修改作品类型按钮
 
@@ -162,7 +172,9 @@ video: {
 video: { type: "file", url: "assets/videos/my-new-work.mp4" }
 ```
 
-把视频文件放进 `assets/videos/` 目录后填写相对路径即可，用系统默认播放器控件（含进度条、音量、全屏）。本地文件不受网络影响，双击 `index.html` 也能正常播放。当前数据中有 2 件作品使用这种方式作为示例（`tech-launch-opener`、`beauty-double11-video`），放入对应 mp4 即可播放。
+把视频文件放进 `assets/videos/` 目录后填写相对路径即可，用系统默认播放器控件（含进度条、音量、全屏）。本地文件不受网络影响，双击 `index.html` 也能正常播放。
+
+> 现状说明：`assets/videos/` 目录内目前没有实际的 mp4 文件，作品与 Showreel 的视频均使用**外链嵌播**（B站等），且 `profile.showreel.video.url` 里的 BV 号仍是示例值。要改用站内播放，请先把 mp4 放进 `assets/videos/` 再填相对路径；注意 Cloudflare Pages 对单个文件体积有限制（约 25 MiB），成片建议继续走外链。
 
 ---
 
@@ -184,18 +196,20 @@ video: { type: "file", url: "assets/videos/my-new-work.mp4" }
 
 ---
 
-## 六、后台编辑与部署（Decap CMS + Cloudflare Pages）
+## 六、后台编辑与部署（Sveltia CMS + Cloudflare Pages）
 
-部署到 Cloudflare Pages 之后，访问 `https://你的域名/admin/`，用 GitHub 账号登录，即可在网页表单里改内容，点保存自动提交并重新发布——不需要本地环境、不需要会 Git。
+部署到 Cloudflare Pages 之后，访问 `https://portfolio-site-7i5.pages.dev/admin/`，用 GitHub 账号登录，即可在网页表单里改内容，点保存自动提交并重新发布——不需要本地环境、不需要会 Git。
+
+> 后台已由 Decap CMS 迁移为 **Sveltia CMS**（配置格式兼容，登录方式与 GitHub OAuth 链路不变，原文件备份在 `_legacy-decap-backup/`）。
 
 ### 6.1 工作原理
 
 | 环节 | 说明 |
 | --- | --- |
 | 数据源 | `content/data.json`：后台编辑器读写的就是这一个文件 |
-| 构建 | `build.js` 读取 `content/data.json`，生成 `assets/js/data.js`（即 `window.PORTFOLIO_DATA = {...}`） |
+| 构建 | `build.js` 读取 `content/data.json`，生成 `assets/js/data.js`（即 `window.PORTFOLIO_DATA = {...}`），并把 `share` 分享信息注入四页 HTML 的 og / twitter 标签 |
 | 页面 | 四个 HTML 页面用 `<script src="assets/js/data.js">` 读取数据，所以本地双击也能预览 |
-| 后台 | `admin/index.html` 加载 Decap CMS，读取 `admin/config.yml` 里的仓库与字段配置 |
+| 后台 | `admin/index.html` 加载 Sveltia CMS（动态 import 后显式 `CMS.init()`），读取 `admin/config.yml` 里的仓库与字段配置 |
 | 登录 | `functions/api/auth.js` 跳转 GitHub 授权 → `functions/api/callback.js` 用 code 换取 token 并回传，Client Secret 全程留在服务端 |
 | 发布 | 后台「保存」= 向 GitHub 提交一次 commit → Cloudflare Pages 检测到提交 → 执行 `node build.js` → 发布新版本 |
 
@@ -268,11 +282,12 @@ backend:
 ### 6.7 第六步：登录后台编辑（日常使用）
 
 1. 打开 `https://portfolio-site-7i5.pages.dev/admin/`；
-2. 点 **Login with GitHub**，在弹出的 GitHub 页面点 **Authorize**；
-3. 进入后台 → 左侧「站点内容」→「全站数据」，可编辑三块内容：
-   - **个人信息**：姓名、头衔、简介、联系方式、Showreel、擅长方向、软件、合作品牌、工作流程、外链；
+2. 点 **Sign in with GitHub**（「使用 GitHub 登录」），在弹出的 GitHub 页面点 **Authorize**；
+3. 进入后台 → 左侧「站点内容」→「全站数据」，可编辑四块内容（表单顺序即下列顺序）：
+   - **作品列表**：每件作品的标题、id、客户、类型、交付时间、封面图、视频、成果数据等，支持**新增 / 删除 / 拖动排序**；
+   - **分享卡片**：微信 / 朋友圈转发链接时的标题、描述与缩略图（见 6.8）；
    - **作品类型**：首页筛选按钮的分类；
-   - **作品列表**：每件作品的标题、客户、类型、交付时间、封面图、视频、成果数据等，支持**新增 / 删除 / 拖动排序**。
+   - **个人信息**（默认折叠）：姓名、头衔、简介、联系方式、Showreel、擅长方向、软件、合作品牌、工作流程、外链。
 4. 点右上角 **Save**：自动向 GitHub 提交一次 commit，Cloudflare Pages 随即重新构建并发布，约 1 分钟后线上生效。
 
 编辑注意：
@@ -282,8 +297,26 @@ backend:
 - 「交付时间」保持 `YYYY-MM` 格式（如 `2025-07`），时间线按它倒序排列。
 - 视频「播放方式」选「外链嵌播」时填 B站 / Vimeo / YouTube 嵌播地址；选「本站视频文件」时填 `assets/videos/xxx.mp4`（文件需自行放进仓库）。
 - 作品序号顺序可在列表里拖动调整，时间线仍以「交付时间」倒序为准。
+- 「分享卡片」分组控制微信 / 朋友圈转发链接时显示的标题、描述与缩略图，见 6.8。
 
-### 6.8 回滚与常见问题
+### 6.8 修改分享卡片（微信 / 朋友圈转发显示）
+
+后台「全站数据」的第二块即「分享卡片」，对应 `content/data.json` 的 `share` 分组：
+
+| 字段 | 作用 |
+| --- | --- |
+| 分享标题 | 转发卡片上的标题。**仅首页链接生效**，内页仍显示各页自己的标题；建议 12-24 字 |
+| 分享描述 | 标题下方的一行说明。**仅首页链接生效**；建议 16-40 字 |
+| 分享缩略图 | 四页共用同一张图；建议 1200×630 像素、文件小于 300KB，上传后自动存到 `assets/uploads/` |
+
+要点：
+
+1. 留空的项自动沿用页面自带的默认值（默认缩略图为 `assets/images/og-cover.png`）。
+2. 改动由 `build.js` 在**构建时**注入各页面的 `og:title` / `og:description` / `og:image` 与 `twitter:*` 标签：线上保存后等约 1 分钟重新构建；本地改 `content/data.json` 后必须执行 `node build.js` 才会写入页面。
+3. 微信 / QQ 会缓存已抓取过的卡片，验证时请用带参数的新链接（如 `https://portfolio-site-7i5.pages.dev/?v=2`）或在微信里清空缓存后再试。
+4. 缩略图必须是公网可访问的图片；相对路径会在构建时自动补成站点绝对地址（微信抓取要求绝对 URL）。
+
+### 6.9 回滚与常见问题
 
 **回滚**：Cloudflare Pages → **Deployments** → 选中要恢复的那次部署 → **Rollback to this deployment**（只回滚线上产物，不改仓库内容）。若要连仓库内容一并退回，在 GitHub 上对 `content/data.json` 执行 **Revert** 提交。
 
@@ -316,5 +349,13 @@ backend:
 
 **Q：中文字符乱码？**
 所有文件均为 UTF-8 编码，用文本编辑器保存时请保持 UTF-8 编码。
-*（内容由AI生成，仅供参考）*
-*（内容由AI生成，仅供参考）*
+
+**Q：改了分享卡片，微信里还是旧标题 / 旧缩略图？**
+微信 / QQ 会缓存已抓取过的卡片。请用带参数的新链接（如 `https://portfolio-site-7i5.pages.dev/?v=2`）验证，或在微信中清空缓存后重试；同时确认 Cloudflare Pages 的重新构建已经完成。
+
+**Q：想让 AI 助手（Cursor / Claude Code）接手维护？**
+把仓库克隆下来后，让助手先读仓库根目录的 `AGENTS.md`（数据模型、部署机制、约束坑点与当前待办都在里面），再动手改动。
+
+---
+
+> 技术交接与改动规范详见 [AGENTS.md](./AGENTS.md)。
