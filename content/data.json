@@ -19,6 +19,26 @@
       "approach": [],
       "results": [],
       "links": []
+    },
+    {
+      "title": "哥斯拉",
+      "id": "gesila",
+      "client": "1123",
+      "category": "混剪",
+      "deliveredAt": "2026-09",
+      "duration": "",
+      "roles": [],
+      "software": [],
+      "cover": "",
+      "video": {
+        "type": "iframe",
+        "url": "<iframe src=\"//player.bilibili.com/player.html?isOutside=true&aid=117326091390665&bvid=BV1paaN6BESw&cid=42167634117&p=1\" scrolling=\"no\" border=\"0\" frameborder=\"no\" framespacing=\"0\" allowfullscreen=\"true\"></iframe>"
+      },
+      "summary": "哈哈哈哈哈哈哈哈哈",
+      "background": "",
+      "approach": [],
+      "results": [],
+      "links": []
     }
   ],
   "share": {
