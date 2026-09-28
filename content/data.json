@@ -32,7 +32,7 @@
       "cover": "",
       "video": {
         "type": "iframe",
-        "url": "https://www.bilibili.com/video/BV1jdR1YvE5t/?share_source=copy_web&vd_source=892e343f3f9840e9145c41e684d277af"
+        "url": "<iframe src=\"//player.bilibili.com/player.html?isOutside=true&aid=114296159868972&bvid=BV1jdR1YvE5t&cid=29282537265&p=1\" scrolling=\"no\" border=\"0\" frameborder=\"no\" framespacing=\"0\" allowfullscreen=\"true\"></iframe>"
       },
       "summary": "哈哈哈哈哈哈哈哈哈",
       "background": "",
