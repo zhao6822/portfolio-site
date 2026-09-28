@@ -21,7 +21,7 @@
       "links": []
     },
     {
-      "title": "哥斯拉",
+      "title": "测试网站运行",
       "id": "gesila",
       "client": "1123",
       "category": "混剪",
@@ -29,12 +29,12 @@
       "duration": "",
       "roles": [],
       "software": [],
-      "cover": "",
+      "cover": "/assets/uploads/ScreenShot_2026-09-28_181728_656.png",
       "video": {
         "type": "iframe",
-        "url": "<iframe src=\"//player.bilibili.com/player.html?isOutside=true&aid=114296159868972&bvid=BV1jdR1YvE5t&cid=29282537265&p=1\" scrolling=\"no\" border=\"0\" frameborder=\"no\" framespacing=\"0\" allowfullscreen=\"true\"></iframe>"
+        "url": "<iframe src=\"//player.bilibili.com/player.html?isOutside=true&aid=117348119876824&bvid=BV1z5a365EJ2&cid=42275963479&p=1\" scrolling=\"no\" border=\"0\" frameborder=\"no\" framespacing=\"0\" allowfullscreen=\"true\"></iframe>"
       },
-      "summary": "哈哈哈哈哈哈哈哈哈",
+      "summary": "测试网站运行状态",
       "background": "",
       "approach": [],
       "results": [],
