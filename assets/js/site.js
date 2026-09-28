@@ -195,13 +195,34 @@
 
   /* ---------------- 播放器懒加载 ---------------- */
 
+  /* 视频地址规范化：
+   *  - 兼容数据中误填「完整 iframe 标签」的情况（如 <iframe src="..."></iframe>），
+   *    自动提取其中的 src 作为真实播放地址，避免整串被当作相对 URL 导致 404 / 黑屏；
+   *  - 其余情况原样返回（纯 URL 或 // 协议相对地址均支持）；
+   *  - 空值 / 标签中无 src 时返回空串，由调用方展示「未配置视频源」提示。 */
+  function normalizeVideoUrl(raw) {
+    var s = String(raw || "").replace(/^\s+|\s+$/g, "");
+    if (!s) return "";
+    if (/^<iframe[\s>]/i.test(s)) {
+      var m = /src\s*=\s*["']([^"']+)["']/i.exec(s);
+      return m ? String(m[1]).replace(/^\s+|\s+$/g, "") : "";
+    }
+    return s;
+  }
+
   function mountPlayer(box) {
     if (!box || box.classList.contains("playing")) return;
-    var url = box.getAttribute("data-url");
-    if (!url) return;
-
+    var url = normalizeVideoUrl(box.getAttribute("data-url"));
     var type = box.getAttribute("data-type");
     var media;
+
+    if (!url) {
+      /* 未配置视频源：显示友好提示，避免静默无反应或黑屏 */
+      box.classList.add("playing");
+      box.insertAdjacentHTML("beforeend",
+        '<div class="player-media"><div class="player-empty">未配置视频源</div></div>');
+      return;
+    }
 
     if (type === "file") {
       media = '<video controls autoplay playsinline preload="auto" src="' + esc(url) + '"></video>' +
