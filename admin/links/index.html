@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>访客链接管理 · 作品集后台</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: #0f172a;
+      color: #e2e8f0;
+      font: 14px/1.6 system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+    .wrap { max-width: 880px; margin: 0 auto; padding: 32px 20px 48px; }
+    h1 { font-size: 22px; margin: 0 0 4px; }
+    .sub { color: #94a3b8; font-size: 13px; margin: 0 0 24px; }
+    .card {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+    .btn {
+      display: inline-block;
+      border: 0;
+      border-radius: 8px;
+      padding: 10px 18px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      color: #fff;
+      background: #2563eb;
+      text-decoration: none;
+    }
+    .btn:hover { filter: brightness(1.1); }
+    .btn.primary { background: #16a34a; }
+    .btn.danger { background: #dc2626; }
+    .btn.small { padding: 6px 12px; font-size: 13px; }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { text-align: left; padding: 10px 8px; border-bottom: 1px solid #334155; vertical-align: middle; }
+    th { color: #94a3b8; font-weight: 600; font-size: 13px; }
+    td .code { font-family: ui-monospace, Consolas, monospace; font-size: 15px; font-weight: 700; letter-spacing: 1px; }
+    .url { color: #7dd3fc; font-size: 12px; word-break: break-all; }
+    .tag {
+      display: inline-block; padding: 2px 8px; border-radius: 999px;
+      font-size: 12px; background: #14532d; color: #86efac;
+    }
+    .tag.revoked { background: #7f1d1d; color: #fca5a5; }
+    .muted { color: #94a3b8; font-size: 12px; }
+    .empty { color: #94a3b8; text-align: center; padding: 24px 0; }
+    .alert {
+      border-radius: 8px; padding: 12px 14px; margin: 12px 0;
+      font-size: 13px; line-height: 1.6;
+    }
+    .alert.info { background: #0c4a6e; color: #bae6fd; }
+    .alert.ok { background: #14532d; color: #bbf7d0; }
+    .alert.err { background: #7f1d1d; color: #fecaca; }
+    .login-box { text-align: center; padding: 48px 20px; }
+    .login-box h2 { margin: 0 0 8px; font-size: 18px; }
+    .login-box p { color: #94a3b8; margin: 0 0 20px; }
+    .back { display: inline-block; margin-top: 24px; color: #93c5fd; font-size: 13px; text-decoration: none; }
+    .new-link { background: #0f172a; border: 1px dashed #2563eb; border-radius: 8px; padding: 12px 14px; margin-top: 12px; word-break: break-all; }
+    .new-link a { color: #7dd3fc; font-weight: 600; }
+    .copied-hint { color: #86efac; font-size: 12px; margin-left: 8px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>访客链接管理</h1>
+    <p class="sub">生成 / 收回本站临时访客链接。改动推送到 GitHub 后，Cloudflare 自动构建约 1-2 分钟生效。</p>
+
+    <div id="alertBox"></div>
+
+    <!-- 未登录视图 -->
+    <div id="loginView" class="card login-box" style="display:none">
+      <h2>需要 GitHub 登录</h2>
+      <p>本页面与内容后台共用同一 GitHub OAuth 鉴权（仅站点管理员可操作），登录后即可管理访客链接。</p>
+      <button id="loginBtn" class="btn">使用 GitHub 登录</button>
+    </div>
+
+    <!-- 已登录视图 -->
+    <div id="mainView" style="display:none">
+      <div class="card">
+        <button id="generateBtn" class="btn primary">生成新访客链接</button>
+        <span class="muted" style="margin-left:12px">每次生成随机 8 位访问码，追加进站点访客码列表并自动提交推送</span>
+      </div>
+
+      <div class="card">
+        <h2 style="font-size:16px;margin:0 0 8px">当前访客码列表</h2>
+        <table>
+          <thead>
+            <tr><th>访问码</th><th>访客链接</th><th>生成时间</th><th>状态</th><th>操作</th></tr>
+          </thead>
+          <tbody id="codeRows"></tbody>
+        </table>
+        <div id="emptyRow" class="empty" style="display:none">暂无访客码，点击上方按钮生成第一个。</div>
+      </div>
+
+      <div id="deployHint" class="alert info" style="display:none">
+        已推送到 GitHub main 分支。Cloudflare 自动构建约 1-2 分钟生效；生效前站点仍按旧的 access.json 校验，
+        新链接请稍候再使用（收回的链接在构建完成后立即失效）。
+      </div>
+    </div>
+
+    <a class="back" href="/admin/">← 返回内容后台</a>
+  </div>
+
+  <script>
+    (function () {
+      var TOKEN_KEY = "portfolio_links_token";
+      var loginView = document.getElementById("loginView");
+      var mainView = document.getElementById("mainView");
+      var alertBox = document.getElementById("alertBox");
+      var codeRows = document.getElementById("codeRows");
+      var emptyRow = document.getElementById("emptyRow");
+      var deployHint = document.getElementById("deployHint");
+
+      function token() {
+        return sessionStorage.getItem(TOKEN_KEY) || "";
+      }
+
+      function setAlert(type, text) {
+        alertBox.innerHTML = '<div class="alert ' + type + '">' + escapeHtml(text) + "</div>";
+      }
+
+      function clearAlert() {
+        alertBox.innerHTML = "";
+      }
+
+      function escapeHtml(s) {
+        return String(s)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;");
+      }
+
+      function showLogin() {
+        loginView.style.display = "block";
+        mainView.style.display = "none";
+      }
+
+      function showMain() {
+        loginView.style.display = "none";
+        mainView.style.display = "block";
+      }
+
+      /* ---------- OAuth：复用 /api/auth → GitHub → /api/callback 弹窗协议 ---------- */
+      var oauthWindow = null;
+
+      function startLogin() {
+        clearAlert();
+        oauthWindow = window.open("/api/auth", "portfolio_links_oauth", "width=560,height=700");
+        if (!oauthWindow) {
+          setAlert("err", "弹窗被浏览器拦截，请允许本站弹出窗口后重试。");
+          return;
+        }
+        setAlert("info", "正在跳转 GitHub 授权…");
+      }
+
+      window.addEventListener("message", function (event) {
+        // Decap 弹窗握手：弹窗发来 authorizing:github，我们回复相同字符串
+        if (event.data === "authorizing:github") {
+          if (event.source) {
+            try {
+              event.source.postMessage("authorizing:github", event.origin);
+            } catch (err) {
+              event.source.postMessage("authorizing:github", "*");
+            }
+          }
+          return;
+        }
+        // 回调结果：authorization:github:success:{"token":"..."} 或 error
+        if (typeof event.data === "string" && event.data.indexOf("authorization:github:") === 0) {
+          var raw = event.data.slice("authorization:github:".length);
+          var sep = raw.indexOf(":");
+          if (sep === -1) return;
+          var status = raw.slice(0, sep);
+          var payloadText = raw.slice(sep + 1);
+          var payload = null;
+          try {
+            payload = JSON.parse(payloadText);
+          } catch (err) {
+            payload = null;
+          }
+          if (status === "success" && payload && payload.token) {
+            sessionStorage.setItem(TOKEN_KEY, payload.token);
+            clearAlert();
+            showMain();
+            loadCodes();
+          } else {
+            setAlert("err", "登录失败：" + (payload && payload.message ? payload.message : "未知错误"));
+            showLogin();
+          }
+          if (oauthWindow) {
+            try { oauthWindow.close(); } catch (err) {}
+            oauthWindow = null;
+          }
+        }
+      });
+
+      /* ---------- API 调用 ---------- */
+      function apiCall(path, options) {
+        var headers = { Authorization: "Bearer " + token() };
+        var opts = { method: options && options.method ? options.method : "GET", headers: headers };
+        if (options && options.body) {
+          opts.body = JSON.stringify(options.body);
+          headers["Content-Type"] = "application/json";
+        }
+        return fetch(path, opts).then(function (resp) {
+          return resp.json().catch(function () {
+            return { ok: false, error: "服务器返回异常（HTTP " + resp.status + "）" };
+          });
+        });
+      }
+
+      function loadCodes() {
+        clearAlert();
+        apiCall("/api/links").then(function (res) {
+          if (!res.ok) {
+            if (res.error && /登录|无效|拒绝/.test(res.error)) {
+              sessionStorage.removeItem(TOKEN_KEY);
+              setAlert("err", res.error);
+              showLogin();
+            } else {
+              setAlert("err", res.error || "加载列表失败");
+            }
+            return;
+          }
+          renderCodes(res.codes || []);
+        });
+      }
+
+      function renderCodes(codes) {
+        codeRows.innerHTML = "";
+        if (!codes.length) {
+          emptyRow.style.display = "block";
+          return;
+        }
+        emptyRow.style.display = "none";
+        codes.forEach(function (item) {
+          var tr = document.createElement("tr");
+          var createdAt = item.createdAt
+            ? formatTime(item.createdAt)
+            : (item.note || "初始保留码");
+          tr.innerHTML =
+            '<td><span class="code">' + escapeHtml(item.code) + "</span></td>" +
+            '<td><div class="url"><a href="' + escapeAttr(item.url) + '" target="_blank" rel="noopener">' +
+            escapeHtml(item.url) + "</a></div></td>" +
+            '<td class="muted">' + escapeHtml(createdAt) + "</td>" +
+            '<td><span class="tag">有效</span></td>' +
+            '<td><button class="btn danger small" data-code="' + escapeAttr(item.code) + '">收回</button></td>';
+          codeRows.appendChild(tr);
+        });
+        codeRows.querySelectorAll("button[data-code]").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            revokeCode(btn.getAttribute("data-code"));
+          });
+        });
+      }
+
+      function formatTime(iso) {
+        var d = new Date(iso);
+        if (isNaN(d.getTime())) return iso;
+        function p(n) { return n < 10 ? "0" + n : String(n); }
+        return d.getFullYear() + "-" + p(d.getMonth() + 1) + "-" + p(d.getDate()) + " " +
+          p(d.getHours()) + ":" + p(d.getMinutes());
+      }
+
+      function escapeAttr(s) {
+        return String(s)
+          .replace(/&/g, "&amp;")
+          .replace(/"/g, "&quot;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;");
+      }
+
+      function generate() {
+        var btn = document.getElementById("generateBtn");
+        btn.disabled = true;
+        clearAlert();
+        apiCall("/api/links", { method: "POST", body: { action: "generate" } }).then(function (res) {
+          btn.disabled = false;
+          if (!res.ok) {
+            setAlert("err", res.error || "生成失败");
+            return;
+          }
+          var box =
+            '<div class="alert ok">已生成新访客链接，并推送到 GitHub：</div>' +
+            '<div class="new-link"><a href="' + escapeAttr(res.url) + '" target="_blank" rel="noopener">' +
+            escapeHtml(res.url) + "</a></div>";
+          alertBox.innerHTML = box;
+          deployHint.style.display = "block";
+          loadCodes();
+        });
+      }
+
+      function revokeCode(code) {
+        if (!window.confirm("确定收回访客码 " + code + " 吗？收回后该链接立即失效，不可恢复。")) return;
+        var btn = null;
+        codeRows.querySelectorAll("button[data-code]").forEach(function (b) {
+          if (b.getAttribute("data-code") === code) btn = b;
+        });
+        if (btn) btn.disabled = true;
+        clearAlert();
+        apiCall("/api/links", { method: "POST", body: { action: "revoke", code: code } }).then(function (res) {
+          if (!res.ok) {
+            setAlert("err", res.error || "收回失败");
+            if (btn) btn.disabled = false;
+            return;
+          }
+          setAlert("ok", "已收回访客码 " + code + " 并推送到 GitHub。");
+          deployHint.style.display = "block";
+          loadCodes();
+        });
+      }
+
+      /* ---------- 初始化 ---------- */
+      document.getElementById("loginBtn").addEventListener("click", startLogin);
+      document.getElementById("generateBtn").addEventListener("click", generate);
+
+      if (token()) {
+        showMain();
+        loadCodes();
+      } else {
+        showLogin();
+      }
+    })();
+  </script>
+</body>
+</html>

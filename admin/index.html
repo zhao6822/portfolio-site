@@ -24,6 +24,24 @@
     =====================================================================
   -->
   <noscript>本后台需要启用 JavaScript 才能使用，请在浏览器中开启后刷新页面。</noscript>
+  <!-- 访客链接管理入口：悬浮按钮，始终可见，点击在新窗口打开管理页 -->
+  <a id="links-entry" href="/admin/links/" target="_blank" rel="noopener">访客链接管理</a>
+  <style>
+    #links-entry {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      z-index: 99999;
+      background: #16a34a;
+      color: #fff;
+      padding: 9px 14px;
+      border-radius: 8px;
+      text-decoration: none;
+      font: 600 13px/1.4 system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+    #links-entry:hover { filter: brightness(1.12); }
+  </style>
   <script type="module">
     // Sveltia CMS 官方发行文件；主源失败时自动切换备用源，提升加载成功率
     const CDN_SOURCES = [
