@@ -86,7 +86,7 @@ collections:
                 name: category
                 widget: select
                 required: false
-                options: ["商业广告", "品牌内容", "电商", "短视频", "纪录片", "MV", "混剪"]
+                options: ["商业广告", "品牌内容", "电商", "短视频", "纪录片", "MV", "混剪", "短剧", "Ai剧"]
                 hint: "从下拉中选择，避免手填出现错别字。下拉选项需与「作品类型（首页筛选按钮）」保持一致；如需新增类型，请在本文档 works → category → options 中同步添加"
               - label: 交付时间
                 name: deliveredAt

@@ -9,20 +9,47 @@
 window.PORTFOLIO_DATA = {
   "works": [
     {
-      "title": "（待填写）作品标题",
-      "id": "template-01",
+      "title": "错爱大佬",
+      "id": "cuoaidalao",
       "client": "",
-      "category": "",
-      "deliveredAt": "",
+      "category": "短视频",
+      "deliveredAt": "2026-04",
+      "duration": "",
+      "roles": [
+        ""
+      ],
+      "software": [],
+      "cover": "https://picsum.photos/id/827/1280/1920.webp",
+      "video": {
+        "type": "file",
+        "url": "https://pan.baidu.com/s/1QWuLvGxATq9P11OIhRHQsw?.mp4pwd=sjxc&_at_=1792381283233"
+      },
+      "summary": "竞稿通过",
+      "background": "",
+      "approach": [],
+      "results": [],
+      "links": [
+        {
+          "label": "",
+          "url": ""
+        }
+      ]
+    },
+    {
+      "title": "测试网站运行",
+      "id": "gesila",
+      "client": "1123",
+      "category": "混剪",
+      "deliveredAt": "2026-09",
       "duration": "",
       "roles": [],
       "software": [],
-      "cover": "",
+      "cover": "/assets/uploads/ScreenShot_2026-09-28_181728_656.png",
       "video": {
-        "type": "",
-        "url": ""
+        "type": "iframe",
+        "url": "<iframe src=\"//player.bilibili.com/player.html?isOutside=true&aid=117348119876824&bvid=BV1z5a365EJ2&cid=42275963479&p=1\" scrolling=\"no\" border=\"0\" frameborder=\"no\" framespacing=\"0\" allowfullscreen=\"true\"></iframe>"
       },
-      "summary": "",
+      "summary": "测试网站运行状态",
       "background": "",
       "approach": [],
       "results": [],
@@ -39,7 +66,9 @@ window.PORTFOLIO_DATA = {
     "真人短剧",
     "纪录片",
     "预告",
-    "混剪"
+    "混剪",
+    "短剧",
+    "Ai剧"
   ],
   "profile": {
     "name": "abc",

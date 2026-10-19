@@ -48,6 +48,138 @@ if (!Array.isArray(data.categories)) fail('"categories" 必须是数组。');
 /* content/data.json 里的封面/视频路径直接用相对路径（如 assets/covers/x.jpg）。
    在 Cloudflare Pages 上根目录即站点根，相对路径同样可用，且能兼容 file:// 本地预览。 */
 
+/* =====================================================================
+ *  未传封面自动生成
+ * ---------------------------------------------------------------------
+ *  作用：works 里没有 cover（缺失或留空）的作品，在构建时自动生成一张
+ *        1920×1080 的渐变 SVG 封面（类别标签 + 作品标题），写入
+ *        assets/covers/，并把该作品的 cover 指向这张自动封面；
+ *        已有 cover 的作品保持原样，不受影响。
+ *  说明：文件名由作品 id 派生（auto-<id>.svg），同一作品每次构建结果
+ *        稳定、幂等；以后给作品补上真实封面后，构建会自动跳过该作品。
+ * ===================================================================== */
+
+var COVERS_DIR = path.join(ROOT, "assets", "covers");
+var AUTO_COVER_PREFIX = "auto-";
+
+/* 与 site.js 渐变占位同风格的深色渐变（深底叠白字，简洁专业） */
+var AUTO_COVER_GRADIENTS = [
+  ["#1f2937", "#111827"],
+  ["#312e81", "#1e1b4b"],
+  ["#7c2d12", "#431407"],
+  ["#134e4a", "#022c22"],
+  ["#6b21a8", "#3b0764"],
+  ["#7f1d1d", "#450a0a"]
+];
+
+function escapeXml(value) {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
+}
+
+function hashId(str) {
+  var h = 0;
+  for (var i = 0; i < String(str).length; i++) {
+    h = (h * 31 + String(str).charCodeAt(i)) >>> 0;
+  }
+  return h;
+}
+
+/* 标题过长时拆成最多两行，每行不超过 16 个字符 */
+function splitTitle(title) {
+  var t = String(title || "").trim();
+  if (!t) t = "未命名作品";
+  var maxLine = 16;
+  if (t.length <= maxLine) return [t];
+  var first = t.slice(0, maxLine);
+  var rest = t.slice(maxLine);
+  if (rest.length <= maxLine) return [first, rest];
+  return [first, rest.slice(0, maxLine - 1) + "…"];
+}
+
+/* 由作品 id 派生安全文件名；id 缺失时回退到 work-<序号> */
+function safeCoverName(id, index) {
+  var base = String(id || "")
+    .toLowerCase()
+    .replace(/[^a-z0-9\u4e00-\u9fa5-]/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "");
+  if (!base) base = "work-" + (index + 1);
+  return AUTO_COVER_PREFIX + base + ".svg";
+}
+
+/* 由分类 id 反查显示名称，用于 SVG 上的类别标签。
+   categories 可能是字符串数组（显示名即值），也可能是 {id,name} 对象数组，两者都兼容。 */
+function categoryLabel(catId) {
+  if (!catId) return "";
+  var categories = data.categories || [];
+  for (var i = 0; i < categories.length; i++) {
+    var c = categories[i];
+    if (typeof c === "string") {
+      if (c === String(catId)) return c;
+    } else if (c && String(c.id) === String(catId)) {
+      return String(c.name) || String(catId);
+    }
+  }
+  return String(catId);
+}
+
+function buildAutoCoverSvg(work, index) {
+  var id = String(work.id || "");
+  var titleLines = splitTitle(work.title);
+  var cat = categoryLabel(work.category);
+  var g = AUTO_COVER_GRADIENTS[hashId(id) % AUTO_COVER_GRADIENTS.length];
+  var gradId = "auto-grad-" + index;
+  var font = 'font-family="PingFang SC, Microsoft YaHei, Noto Sans SC, sans-serif"';
+  var parts = [];
+
+  parts.push('<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">');
+  parts.push("  <defs>");
+  parts.push('    <linearGradient id="' + gradId + '" x1="0" y1="0" x2="1" y2="1">');
+  parts.push('      <stop offset="0%" stop-color="' + g[0] + '"/>');
+  parts.push('      <stop offset="100%" stop-color="' + g[1] + '"/>');
+  parts.push("    </linearGradient>");
+  parts.push("  </defs>");
+  parts.push('  <rect width="1920" height="1080" fill="url(#' + gradId + ')"/>');
+  parts.push('  <rect x="0" y="0" width="1920" height="1080" fill="none" stroke="rgba(255,255,255,0.10)" stroke-width="6"/>');
+
+  if (cat) {
+    var labelW = 80 + cat.length * 40;
+    var labelX = 960 - labelW / 2;
+    parts.push('  <rect x="' + labelX + '" y="356" width="' + labelW + '" height="68" rx="34" fill="rgba(255,255,255,0.16)"/>');
+    parts.push('  <text x="960" y="400" text-anchor="middle" ' + font + ' font-size="38" fill="rgba(255,255,255,0.92)" letter-spacing="8">' + escapeXml(cat) + "</text>");
+  }
+
+  var firstY = titleLines.length === 1 ? 600 : 520;
+  titleLines.forEach(function (line, i) {
+    var y = firstY + i * 130;
+    parts.push('  <text x="960" y="' + y + '" text-anchor="middle" ' + font + ' font-size="112" font-weight="600" fill="#ffffff" letter-spacing="4">' + escapeXml(line) + "</text>");
+  });
+
+  parts.push("</svg>");
+  return parts.join("\n");
+}
+
+/* 遍历作品：为缺失封面的作品生成自动封面，并回写 cover 字段 */
+var autoCovers = [];
+fs.mkdirSync(COVERS_DIR, { recursive: true });
+(data.works || []).forEach(function (work, index) {
+  var cover = work.cover != null ? String(work.cover).trim() : "";
+  if (cover) return; /* 已有封面：保持原样 */
+  var fileName = safeCoverName(work.id, index);
+  fs.writeFileSync(path.join(COVERS_DIR, fileName), buildAutoCoverSvg(work, index), "utf8");
+  work.cover = "assets/covers/" + fileName;
+  autoCovers.push(fileName);
+});
+
+if (autoCovers.length) {
+  console.log("[build] 自动封面生成：" + autoCovers.length + " 张（" + autoCovers.join("、") + "）");
+}
+
 const banner = [
   "/* =====================================================================",
   " *  剪辑师作品集 · 数据文件",
@@ -170,4 +302,3 @@ console.log(
       ? injected.join("、") + "（标题：" + (shareTitle || "沿用页面默认值") + "）"
       : "未注入，页面保留原有默认值")
 );
-
