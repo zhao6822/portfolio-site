@@ -21,9 +21,9 @@
 const SOCIAL_UA_PATTERN =
   /(MicroMessenger|wechat|facebookexternalhit|Facebot|Twitterbot|LinkedInBot|slackbot|Discordbot|WhatsApp|TelegramBot|Pinterest|YandexBot|QQSpider|QQ\/|MQQBrowser|Baiduspider|bingbot|Googlebot|Applebot|MetaInspector)/i;
 
-/* 静态资源扩展名（放行，不参与访问门校验） */
+/* 静态资源扩展名（放行，不参与访问门校验；json 用于中间件读取 access.json） */
 const STATIC_EXT_PATTERN =
-  /\.(js|css|png|jpe?g|webp|gif|svg|ico|avif|mp4|webm|ogv|mp3|wav|m4a|woff2?|ttf|otf|eot|pdf|zip|map)$/i;
+  /\.(js|css|json|png|jpe?g|webp|gif|svg|ico|avif|mp4|webm|ogv|mp3|wav|m4a|woff2?|ttf|otf|eot|pdf|zip|map)$/i;
 
 const ADMIN_PREFIX = "/admin";
 const COOKIE_NAME = "site_visit_ok";
@@ -71,7 +71,7 @@ export async function onRequest(context) {
   const visit = (url.searchParams.get("visit") || "").trim();
   if (visit) {
     try {
-      const accessResp = await env.ASSETS.fetch(new URL("/access.json", url).toString());
+      const accessResp = await fetch(new URL("/access.json", url).toString());
       if (accessResp.ok) {
         const access = await accessResp.json();
         const codes = Array.isArray(access.accessCodes) ? access.accessCodes : [];
