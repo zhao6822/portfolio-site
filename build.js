@@ -183,26 +183,35 @@ if (autoCovers.length) {
 /* =====================================================================
  *  访问门：生成 access.json
  * ---------------------------------------------------------------------
- *  作用：读取 content/data.json 的 site.accessCode（站点访问码），
+ *  作用：读取 content/data.json 的 site.accessCodes（访客临时码数组），
  *        写入站点根目录 access.json，供 Cloudflare Pages Functions
  *        （functions/_middleware.js）运行时读取比对，用于拦截未授权
  *        的页面 HTML 请求。
- *  说明：site.accessCode 缺失时跳过生成并给出警告，不影响其余构建。
+ *  说明：管理员钥匙不写入仓库（由 Cloudflare 环境变量 OWNER_KEY 提供，
+ *        中间件直接读取 env.OWNER_KEY 比对）。site.accessCodes 缺失时
+ *        跳过生成并给出警告，不影响其余构建。
  * ===================================================================== */
 
 var ACCESS_TARGET = path.join(ROOT, "access.json");
-var siteAccessCode =
-  data.site && data.site.accessCode ? String(data.site.accessCode).trim() : "";
+var siteAccessCodes = Array.isArray(data.site && data.site.accessCodes)
+  ? data.site.accessCodes
+      .filter(function (code) {
+        return typeof code === "string" && code.trim().length > 0;
+      })
+      .map(function (code) {
+        return code.trim();
+      })
+  : [];
 
-if (siteAccessCode) {
+if (siteAccessCodes.length > 0) {
   fs.writeFileSync(
     ACCESS_TARGET,
-    JSON.stringify({ accessCode: siteAccessCode }, null, 2) + "\n",
+    JSON.stringify({ accessCodes: siteAccessCodes }, null, 2) + "\n",
     "utf8"
   );
-  console.log("[build] 访问门：access.json 已生成（访问码已配置）");
+  console.log("[build] 访问门：access.json 已生成（访客码 " + siteAccessCodes.length + " 个）");
 } else {
-  console.warn("[build] 访问门：content/data.json 未配置 site.accessCode，跳过生成 access.json");
+  console.warn("[build] 访问门：content/data.json 未配置 site.accessCodes，跳过生成 access.json");
 }
 
 const banner = [

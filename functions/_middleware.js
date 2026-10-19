@@ -1,16 +1,20 @@
 /**
  * 访问门中间件（Cloudflare Pages Functions）
  * ---------------------------------------------------------------------
- *  作用：拦截所有请求，对「页面 HTML」做访问控制：
+ *  作用：拦截所有请求，对「页面 HTML」做访问控制（管理员钥匙 + 访客临时码）：
  *    · 放行 /admin 后台与 /api（Decap/Sveltia OAuth 与数据接口不受影响）；
  *    · 放行社交爬虫 UA（微信 / QQ / Facebook / Twitter 等），保证分享
  *      卡片 og 标签可被抓取；
  *    · 放行静态资源（js / css / 图片 / 视频 / 字体等）；
- *    · 带有效 ?visit= 访问码的请求放行，并种下 Cookie 免重复输入；
+ *    · 管理员：URL query 的 owner 参数与 Cloudflare 环境变量 OWNER_KEY
+ *      比对，匹配则放行并种 30 天免码 Cookie（OWNER_KEY 由用户在
+ *      Cloudflare 面板配置 Secret，绝不写入仓库）；
+ *    · 访客：URL query 的 visit 参数命中 access.json 中 accessCodes 数组
+ *      任意一个即放行并种 Cookie；
  *    · 已通过校验（携带 Cookie）的请求放行；
  *    · 其余页面请求返回 403「无权访问」。
- *  访问码来源：构建产物 access.json（由 build.js 依据
- *              content/data.json 的 site.accessCode 生成）。
+ *  访客码来源：构建产物 access.json（由 build.js 依据
+ *              content/data.json 的 site.accessCodes 生成）。
  */
 
 /* 社交爬虫 / 分享卡片抓取 UA（命中即放行，保证转发时有 og 卡片） */
@@ -51,16 +55,30 @@ export async function onRequest(context) {
     return next();
   }
 
-  /* ⑤ 带有效 ?visit= 访问码：与 /access.json 比对，通过则放行并种 Cookie */
+  /* ⑤ 管理员钥匙：?owner= 与 Cloudflare 环境变量 OWNER_KEY 比对 */
+  const ownerKey = env.OWNER_KEY || "";
+  const owner = (url.searchParams.get("owner") || "").trim();
+  if (ownerKey && owner && owner === ownerKey) {
+    const resp = await next();
+    resp.headers.append(
+      "Set-Cookie",
+      COOKIE_NAME + "=1; Path=/; Max-Age=" + COOKIE_MAX_AGE + "; SameSite=Lax"
+    );
+    return resp;
+  }
+
+  /* ⑥ 访客临时码：?visit= 命中 access.json 的 accessCodes 数组任意一项 */
   const visit = (url.searchParams.get("visit") || "").trim();
   if (visit) {
     try {
       const accessResp = await env.ASSETS.fetch(new URL("/access.json", url));
       if (accessResp.ok) {
         const access = await accessResp.json();
+        const codes = Array.isArray(access.accessCodes) ? access.accessCodes : [];
         if (
-          access.accessCode &&
-          String(access.accessCode).trim() === visit
+          codes.some(function (code) {
+            return String(code).trim() === visit;
+          })
         ) {
           const resp = await next();
           resp.headers.append(
@@ -75,7 +93,7 @@ export async function onRequest(context) {
     }
   }
 
-  /* ⑥ 其余请求：403 无权访问 */
+  /* ⑦ 其余请求：403 无权访问 */
   return new Response(unauthorizedHtml(url), {
     status: 403,
     headers: {

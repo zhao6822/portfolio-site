@@ -49,7 +49,8 @@
     }
   ],
   "site": {
-    "accessCode": "7GD3NR25"
+    "accessCodes": ["7GD3NR25"],
+    "ownerNote": "管理员钥匙由 Cloudflare 环境变量 OWNER_KEY 配置（不入仓库），本站只存访客临时码 accessCodes"
   },
   "share": {
     "title": "赵鹏 · 作品集 — 工作成果记录",
