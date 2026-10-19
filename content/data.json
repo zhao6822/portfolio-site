@@ -49,11 +49,11 @@
     }
   ],
   "site": {
-    "accessCodes": ["7GD3NR25"],
+    "accessCodes": [],
     "accessCodeMeta": {
       "7GD3NR25": {
         "createdAt": "",
-        "status": "active",
+        "status": "revoked",
         "note": "初始保留码"
       }
     },
