@@ -49,12 +49,18 @@
     }
   ],
   "site": {
-    "accessCodes": [],
+    "accessCodes": [
+      "XX35A66R"
+    ],
     "accessCodeMeta": {
       "7GD3NR25": {
         "createdAt": "",
         "status": "revoked",
         "note": "初始保留码"
+      },
+      "XX35A66R": {
+        "createdAt": "2026-10-19T06:02:52.691Z",
+        "status": "active"
       }
     },
     "ownerNote": "管理员钥匙由 Cloudflare 环境变量 OWNER_KEY 配置（不入仓库），本站只存访客临时码 accessCodes；accessCodeMeta 记录每个访客码的生成时间与状态（由 /admin/links 管理页维护）"
