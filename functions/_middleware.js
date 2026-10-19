@@ -71,7 +71,7 @@ export async function onRequest(context) {
   const visit = (url.searchParams.get("visit") || "").trim();
   if (visit) {
     try {
-      const accessResp = await env.ASSETS.fetch(new URL("/access.json", url));
+      const accessResp = await env.ASSETS.fetch(new URL("/access.json", url).toString());
       if (accessResp.ok) {
         const access = await accessResp.json();
         const codes = Array.isArray(access.accessCodes) ? access.accessCodes : [];
