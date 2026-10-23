@@ -14,7 +14,7 @@
       "cover": "https://picsum.photos/id/827/1280/1920.webp",
       "video": {
         "type": "file",
-        "url": "https://pan.baidu.com/s/1QWuLvGxATq9P11OIhRHQsw?.mp4pwd=sjxc&_at_=1792381283233"
+        "url": "https://portfolio-videos-1306038850.cos.ap-chengdu.myqcloud.com/cadl.mp4"
       },
       "summary": "竞稿通过",
       "background": "",
@@ -48,23 +48,6 @@
       "links": []
     }
   ],
-  "site": {
-    "accessCodes": [
-      "XX35A66R"
-    ],
-    "accessCodeMeta": {
-      "7GD3NR25": {
-        "createdAt": "",
-        "status": "revoked",
-        "note": "初始保留码"
-      },
-      "XX35A66R": {
-        "createdAt": "2026-10-19T06:02:52.691Z",
-        "status": "active"
-      }
-    },
-    "ownerNote": "管理员钥匙由 Cloudflare 环境变量 OWNER_KEY 配置（不入仓库），本站只存访客临时码 accessCodes；accessCodeMeta 记录每个访客码的生成时间与状态（由 /admin/links 管理页维护）"
-  },
   "share": {
     "title": "赵鹏 · 作品集 — 工作成果记录",
     "description": "赵鹏的工作成果记录。",
@@ -220,5 +203,22 @@
         "url": "https://vimeo.com/example"
       }
     ]
+  },
+  "site": {
+    "accessCodeMeta": {
+      "7GD3NR25": {
+        "createdAt": "",
+        "note": "初始保留码",
+        "status": "revoked"
+      },
+      "XX35A66R": {
+        "createdAt": "2026-10-19T06:02:52.691Z",
+        "status": "active"
+      }
+    },
+    "accessCodes": [
+      "XX35A66R"
+    ],
+    "ownerNote": "管理员钥匙由 Cloudflare 环境变量 OWNER_KEY 配置（不入仓库），本站只存访客临时码 accessCodes；accessCodeMeta 记录每个访客码的生成时间与状态（由 /admin/links 管理页维护）"
   }
 }
