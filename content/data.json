@@ -28,7 +28,7 @@
       ]
     },
     {
-      "title": "测试网站运行",
+      "title": "哥斯拉测试",
       "id": "gesila",
       "client": "1123",
       "category": "混剪",
@@ -39,7 +39,7 @@
       "cover": "",
       "video": {
         "type": "file",
-        "url": "https://portfolio-videos-1306038850.cos.ap-chengdu.myqcloud.com/gsla-test-8f3k2.mp4"
+        "url": "https://portfolio-videos-1306038850.cos.ap-chengdu.myqcloud.com/%E5%93%A5%E6%96%AF%E6%8B%89%E6%B5%8B%E8%AF%95.mp4"
       },
       "summary": "测试网站运行状态",
       "background": "",
