@@ -38,8 +38,8 @@
       "software": [],
       "cover": "/assets/uploads/ScreenShot_2026-09-28_181728_656.png",
       "video": {
-        "type": "iframe",
-        "url": "<iframe src=\"//player.bilibili.com/player.html?isOutside=true&aid=117348119876824&bvid=BV1z5a365EJ2&cid=42275963479&p=1\" scrolling=\"no\" border=\"0\" frameborder=\"no\" framespacing=\"0\" allowfullscreen=\"true\"></iframe>"
+        "type": "file",
+        "url": "https://portfolio-videos-1306038850.cos.ap-chengdu.myqcloud.com/gsla-test-8f3k2.mp4"
       },
       "summary": "测试网站运行状态",
       "background": "",
