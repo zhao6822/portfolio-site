@@ -49,8 +49,8 @@
     }
   ],
   "share": {
-    "title": "赵鹏 · 作品集 — 工作成果记录",
-    "description": "赵鹏的工作成果记录。",
+    "title": "赵鹏 · 作品集 — 无限进步",
+    "description": "赵鹏的作品集。",
     "image": "assets/images/og-cover.png"
   },
   "categories": [
@@ -63,10 +63,10 @@
     "Ai剧"
   ],
   "profile": {
-    "name": "abc",
-    "title": "视频剪辑师 / 后期导演",
+    "name": "赵鹏",
+    "title": "视频剪辑师 / Ai导演",
     "tagline": "把素材剪成节奏，把节奏剪成情绪。",
-    "bio": "2 年商业视频后期经验，服务过的品牌客户。擅长从大量素材中找出结构，在品牌要求与视听节奏之间找到平衡点；从剪辑、调色到声音设计可以独立完成整条后期链路。",
+    "bio": "两年左右后期剪辑经验，海外剧，狼人题材，女频，真人短剧，AI短剧，商业广告。做过多部爆款短剧，获得多个甲方的认可。一卡经验丰富，会把控短剧叙事节奏、放大冲突、钩子设计、卡点节奏，懂得开篇留人。",
     "location": "郑州",
     "years": "2年",
     "email": "zhaopeng6822@qq.com",
@@ -74,7 +74,7 @@
     "wechat": "zpp9038",
     "showreel": {
       "title": "个人记录",
-      "subtitle": "商业广告 / 品牌内容 / 纪录片 精选片段",
+      "subtitle": "短剧 / Ai抽卡 / 商业广告",
       "duration": "2:10",
       "cover": "assets/covers/showreel.jpg",
       "hint": "点击封面播放",
@@ -85,24 +85,20 @@
     },
     "strengths": [
       {
-        "title": "商业广告剪辑",
-        "desc": "15s / 30s TVC 与信息流版本，擅长在极短时长内明确卖点与情绪落点。"
+        "title": "真人/Ai剧剪辑",
+        "desc": "创造性剪辑思维，懂得利用技巧规避穿帮，靠剪辑、音效、镜头穿插、转场、偷格变\n速，调色，把戏救起来，减少抽卡次数，节省算力成本。"
       },
       {
-        "title": "品牌故事片",
-        "desc": "3-5 分钟品牌内容，用叙事结构承载品牌主张，兼顾传播性与品牌调性。"
+        "title": "责任担当",
+        "desc": "任职过组长，主管，审剪兼顾。负责成片初审，独立承担项目试稿、重点单集剪辑，可在抽审其他组员片子的间隙同步完成自己的成片产出；统一交付标准，汇总修改意见。"
       },
       {
-        "title": "电商短视频",
-        "desc": "主图视频与详情页视频，以转化为导向，节奏紧凑、卖点前置、静音可读。"
+        "title": "完整工作流",
+        "desc": "熟悉短剧后期交付规范，多版本打包，工程整理规范，素材归档清晰，方便后期多轮改稿，适应赶档加急，抗压强，保质保量准时交片。"
       },
       {
         "title": "纪录片式剪辑",
         "desc": "长素材结构梳理与访谈剪辑，擅长在真实素材里找到情绪线。"
-      },
-      {
-        "title": "MV 与混剪",
-        "desc": "音乐卡点、情绪起伏与画面重复的设计，节奏与画面对位处理。"
       },
       {
         "title": "调色与声音设计",
@@ -115,24 +111,20 @@
         "items": [
           "Adobe Premiere Pro",
           "DaVinci Resolve",
-          "Final Cut Pro",
-          "Avid Media Composer"
+          "剪映"
         ]
       },
       {
         "group": "调色",
         "items": [
           "DaVinci Resolve",
-          "Lumetri Color",
-          "FilmConvert"
+          "PhotoShop"
         ]
       },
       {
         "group": "声音",
         "items": [
-          "Adobe Audition",
-          "iZotope RX",
-          "Pro Tools（基础）"
+          "Adobe Audition"
         ]
       },
       {
@@ -146,27 +138,12 @@
       {
         "group": "协作与交付",
         "items": [
-          "Frame.io",
-          "ftrack",
           "DaVinci 协作流程",
           "ProRes / H.264 多规格输出"
         ]
       }
     ],
-    "brands": [
-      "蔚蓝汽车",
-      "燃力运动饮料",
-      "晴山护肤",
-      "客家电",
-      "见山户外",
-      "城市文旅局",
-      "回声室乐队",
-      "星野科技",
-      "拾光咖啡",
-      "宜居家居",
-      "云牧乳业",
-      "野行户外"
-    ],
+    "brands": [],
     "workflow": [
       {
         "title": "需求对齐",
@@ -195,12 +172,8 @@
     ],
     "links": [
       {
-        "label": "B站主页",
-        "url": "https://space.bilibili.com/example"
-      },
-      {
-        "label": "作品集（Vimeo）",
-        "url": "https://vimeo.com/example"
+        "label": "Github主页",
+        "url": "https://github.com/zhao6822/portfolio-site"
       }
     ]
   },
