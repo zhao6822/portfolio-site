@@ -287,7 +287,7 @@
           '<p class="hero-bio">' + esc(PROFILE.bio || "") + "</p>" +
           '<div class="hero-actions">' +
             '<a class="btn btn-primary" href="#works">浏览全部作品</a>' +
-            '<a class="btn btn-ghost" href="about.html">关于我</a>' +
+            '<a class="btn btn-about" href="about.html">关于我</a>' +
           "</div>" +
           '<div class="hero-stats">' + stats.map(function (s) {
             return '<div class="stat"><span class="stat-value">' + esc(s.value) +
@@ -315,6 +315,7 @@
         heroMedia.innerHTML =
           '<div class="connect-card">' +
             '<div class="connect-head"><strong>和我建联</strong><span>有合作直接找我</span></div>' +
+            '<div class="connect-qr"><img src="assets/uploads/wechat-qr.png" alt="微信二维码" loading="lazy"><span>扫码加微信</span></div>' +
             connect +
             (linkHtml ? '<div class="connect-links">' + linkHtml + "</div>" : "") +
           "</div>";
