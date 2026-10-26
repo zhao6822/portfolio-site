@@ -1,45 +1,38 @@
 {
   "works": [
     {
-      "title": "错爱大佬（海外）",
-      "id": "cuoaidalao",
-      "client": "",
-      "category": "短视频",
-      "deliveredAt": "2026-04",
-      "duration": "",
-      "roles": [
-        ""
-      ],
-      "software": [],
-      "cover": "/assets/uploads/ScreenShot_2026-10-26_121059_066.png",
-      "video": {
-        "type": "file",
-        "url": "https://portfolio-videos-1306038850.cos.ap-chengdu.myqcloud.com/%E9%94%99%E7%88%B1%E5%A4%A7%E4%BD%AC.mp4"
-      },
-      "summary": "竞稿通过",
-      "background": "",
-      "approach": [],
-      "results": [],
-      "links": [
-        {
-          "label": "",
-          "url": ""
-        }
-      ]
-    },
-    {
-      "title": "废土女狼王（海外）",
-      "id": "ftnlw",
+      "title": "贝雷虎军事漫游（仿真人CG漫）",
+      "id": "blhjsmy",
       "client": "",
       "category": "Ai剧",
-      "deliveredAt": "2026-09",
+      "deliveredAt": "",
       "duration": "",
       "roles": [],
       "software": [],
-      "cover": "/assets/uploads/pasted-image-1792854776982.png",
+      "cover": "/assets/uploads/贝雷虎.png",
       "video": {
         "type": "file",
-        "url": "https://portfolio-videos-1306038850.cos.ap-chengdu.myqcloud.com/%E6%A0%B7%E7%89%87.mp4"
+        "url": "https://portfolio-videos-1306038850.cos.ap-chengdu.myqcloud.com/%E8%B4%9D%E9%9B%B7%E8%99%8E%E5%86%9B%E4%BA%8B%E6%BC%AB%E6%B8%B8.mp4"
+      },
+      "summary": "",
+      "background": "",
+      "approach": [],
+      "results": [],
+      "links": []
+    },
+    {
+      "title": "神级御兽师",
+      "id": "yss",
+      "client": "",
+      "category": "Ai剧",
+      "deliveredAt": "",
+      "duration": "",
+      "roles": [],
+      "software": [],
+      "cover": "/assets/uploads/ScreenShot_2026-10-26_142452_881.png",
+      "video": {
+        "type": "file",
+        "url": "https://portfolio-videos-1306038850.cos.ap-chengdu.myqcloud.com/%E5%BE%A1%E5%85%BD%E5%B8%88.mp4"
       },
       "summary": "",
       "background": "",
@@ -60,6 +53,43 @@
       "video": {
         "type": "file",
         "url": "https://portfolio-videos-1306038850.cos.ap-chengdu.myqcloud.com/%E5%81%9C%E8%BD%A6%E4%BD%8D.mp4"
+      },
+      "summary": "",
+      "background": "",
+      "approach": [],
+      "results": [],
+      "links": []
+    },
+    {
+      "title": "封狼居胥（上中下合集）",
+      "id": "fljx",
+      "client": "",
+      "category": "Ai剧",
+      "deliveredAt": "",
+      "duration": "",
+      "roles": [],
+      "software": [],
+      "cover": "/assets/uploads/霍去病封狼居胥.png",
+      "video": null,
+      "summary": "拉到了10w投资",
+      "background": "",
+      "approach": [],
+      "results": [],
+      "links": []
+    },
+    {
+      "title": "龙塌换人",
+      "id": "lthr",
+      "client": "",
+      "category": "短剧",
+      "deliveredAt": "",
+      "duration": "",
+      "roles": [],
+      "software": [],
+      "cover": "/assets/uploads/ScreenShot_2026-10-26_135549_397.png",
+      "video": {
+        "type": "file",
+        "url": "https://portfolio-videos-1306038850.cos.ap-chengdu.myqcloud.com/%E6%8D%A2%E4%BA%BA.mp4"
       },
       "summary": "",
       "background": "",
@@ -101,6 +131,110 @@
         "type": "file",
         "url": "https://portfolio-videos-1306038850.cos.ap-chengdu.myqcloud.com/%E5%85%8D%E8%B4%B9%E5%A5%87%E8%B0%AD.mp4"
       },
+      "summary": "",
+      "background": "",
+      "approach": [],
+      "results": [],
+      "links": []
+    },
+    {
+      "title": "少年霍去病",
+      "id": "snhqb",
+      "client": "",
+      "category": "",
+      "deliveredAt": "",
+      "duration": "",
+      "roles": [],
+      "software": [],
+      "cover": "/assets/uploads/少年霍去病.png",
+      "video": {
+        "type": "file",
+        "url": "https://portfolio-videos-1306038850.cos.ap-chengdu.myqcloud.com/%E5%B0%91%E5%B9%B4%E9%9C%8D%E5%8E%BB%E7%97%85.mp4"
+      },
+      "summary": "",
+      "background": "",
+      "approach": [],
+      "results": [],
+      "links": []
+    },
+    {
+      "title": "错爱大佬（海外）",
+      "id": "cuoaidalao",
+      "client": "",
+      "category": "短视频",
+      "deliveredAt": "2026-04",
+      "duration": "",
+      "roles": [
+        ""
+      ],
+      "software": [],
+      "cover": "/assets/uploads/ScreenShot_2026-10-26_121059_066.png",
+      "video": {
+        "type": "file",
+        "url": "https://portfolio-videos-1306038850.cos.ap-chengdu.myqcloud.com/%E9%94%99%E7%88%B1%E5%A4%A7%E4%BD%AC.mp4"
+      },
+      "summary": "竞稿通过",
+      "background": "",
+      "approach": [],
+      "results": [],
+      "links": [
+        {
+          "label": "",
+          "url": ""
+        }
+      ]
+    },
+    {
+      "title": "龙场悟道",
+      "id": "lcwd",
+      "client": "",
+      "category": "Ai剧",
+      "deliveredAt": "",
+      "duration": "",
+      "roles": [],
+      "software": [],
+      "cover": "/assets/uploads/王阳明.png",
+      "video": {
+        "type": "file",
+        "url": "https://portfolio-videos-1306038850.cos.ap-chengdu.myqcloud.com/%E7%8E%8B%E9%98%B3%E6%98%8E%E9%BE%99%E5%9C%BA%E6%82%9F%E9%81%93.mp4"
+      },
+      "summary": "",
+      "background": "",
+      "approach": [],
+      "results": [],
+      "links": []
+    },
+    {
+      "title": "马甲一掉全球都轰动了",
+      "id": "mjyd",
+      "client": "",
+      "category": "短剧",
+      "deliveredAt": "",
+      "duration": "",
+      "roles": [],
+      "software": [],
+      "cover": "/assets/uploads/ScreenShot_2026-10-26_135505_969.png",
+      "video": {
+        "type": "file",
+        "url": "https://portfolio-videos-1306038850.cos.ap-chengdu.myqcloud.com/%E9%A9%AC%E7%94%B2%E4%B8%80%E6%8E%89%E5%85%A8%E7%90%83%E9%83%BD%E8%BD%B0%E5%8A%A8%E4%BA%86.mp4"
+      },
+      "summary": "",
+      "background": "",
+      "approach": [],
+      "results": [],
+      "links": []
+    },
+    {
+      "title": "我的流浪保镖竟是全境狼王（海外）",
+      "id": "llbb",
+      "client": "",
+      "category": "Ai剧",
+      "deliveredAt": "",
+      "duration": "",
+      "roles": [],
+      "software": [],
+      "cover": "/assets/uploads/ScreenShot_2026-10-26_111301_976.png",
+      "video": null,
       "summary": "",
       "background": "",
       "approach": [],
@@ -168,18 +302,18 @@
       "links": []
     },
     {
-      "title": "少年霍去病",
-      "id": "snhqb",
+      "title": "废土女狼王（海外）",
+      "id": "ftnlw",
       "client": "",
-      "category": "",
-      "deliveredAt": "",
+      "category": "Ai剧",
+      "deliveredAt": "2026-09",
       "duration": "",
       "roles": [],
       "software": [],
-      "cover": "/assets/uploads/少年霍去病.png",
+      "cover": "/assets/uploads/pasted-image-1792854776982.png",
       "video": {
         "type": "file",
-        "url": "https://portfolio-videos-1306038850.cos.ap-chengdu.myqcloud.com/%E5%B0%91%E5%B9%B4%E9%9C%8D%E5%8E%BB%E7%97%85.mp4"
+        "url": "https://portfolio-videos-1306038850.cos.ap-chengdu.myqcloud.com/%E6%A0%B7%E7%89%87.mp4"
       },
       "summary": "",
       "background": "",
@@ -228,75 +362,18 @@
       "links": []
     },
     {
-      "title": "我的流浪保镖竟是全境狼王（海外）",
-      "id": "llbb",
+      "title": "魔幻时代（商单）",
+      "id": "mssd",
       "client": "",
-      "category": "Ai剧",
+      "category": "商业广告",
       "deliveredAt": "",
       "duration": "",
       "roles": [],
       "software": [],
-      "cover": "/assets/uploads/ScreenShot_2026-10-26_111301_976.png",
-      "video": null,
-      "summary": "",
-      "background": "",
-      "approach": [],
-      "results": [],
-      "links": []
-    },
-    {
-      "title": "爷爷的饺子",
-      "id": "yydjz",
-      "client": "",
-      "category": "Ai剧",
-      "deliveredAt": "",
-      "duration": "",
-      "roles": [],
-      "software": [],
-      "cover": "/assets/uploads/饺子.png",
+      "cover": "",
       "video": {
         "type": "file",
-        "url": "https://portfolio-videos-1306038850.cos.ap-chengdu.myqcloud.com/%E7%88%B7%E7%88%B7%E7%9A%84%E9%A5%BA%E5%AD%90.mp4"
-      },
-      "summary": "",
-      "background": "",
-      "approach": [],
-      "results": [],
-      "links": []
-    },
-    {
-      "title": "龙场悟道",
-      "id": "lcwd",
-      "client": "",
-      "category": "Ai剧",
-      "deliveredAt": "",
-      "duration": "",
-      "roles": [],
-      "software": [],
-      "cover": "/assets/uploads/王阳明.png",
-      "video": {
-        "type": "file",
-        "url": "https://portfolio-videos-1306038850.cos.ap-chengdu.myqcloud.com/%E7%8E%8B%E9%98%B3%E6%98%8E%E9%BE%99%E5%9C%BA%E6%82%9F%E9%81%93.mp4"
-      },
-      "summary": "",
-      "background": "",
-      "approach": [],
-      "results": [],
-      "links": []
-    },
-    {
-      "title": "贝雷虎军事漫游（仿真人CG漫）",
-      "id": "blhjsmy",
-      "client": "",
-      "category": "Ai剧",
-      "deliveredAt": "",
-      "duration": "",
-      "roles": [],
-      "software": [],
-      "cover": "/assets/uploads/贝雷虎.png",
-      "video": {
-        "type": "file",
-        "url": "https://portfolio-videos-1306038850.cos.ap-chengdu.myqcloud.com/%E8%B4%9D%E9%9B%B7%E8%99%8E%E5%86%9B%E4%BA%8B%E6%BC%AB%E6%B8%B8.mp4"
+        "url": "https://portfolio-videos-1306038850.cos.ap-chengdu.myqcloud.com/%E9%AD%94%E5%B9%BB%E6%97%B6%E4%BB%A3.mp4"
       },
       "summary": "",
       "background": "",
@@ -345,6 +422,26 @@
       "links": []
     },
     {
+      "title": "肥婆皇后",
+      "id": "fphh",
+      "client": "",
+      "category": "Ai剧",
+      "deliveredAt": "",
+      "duration": "",
+      "roles": [],
+      "software": [],
+      "cover": "/assets/uploads/ScreenShot_2026-10-26_140202_582.png",
+      "video": {
+        "type": "file",
+        "url": "https://portfolio-videos-1306038850.cos.ap-chengdu.myqcloud.com/%E8%82%A5%E5%A9%86%E7%9A%87%E5%90%8E.mp4"
+      },
+      "summary": "",
+      "background": "",
+      "approach": [],
+      "results": [],
+      "links": []
+    },
+    {
       "title": "重生预告",
       "id": "csyg",
       "client": "",
@@ -357,6 +454,26 @@
       "video": {
         "type": "file",
         "url": "https://portfolio-videos-1306038850.cos.ap-chengdu.myqcloud.com/%E9%87%8D%E7%94%9F%E9%A2%84%E5%91%8A.mp4"
+      },
+      "summary": "",
+      "background": "",
+      "approach": [],
+      "results": [],
+      "links": []
+    },
+    {
+      "title": "让你卧底没让你勾引大嫂",
+      "id": "rnwd",
+      "client": "",
+      "category": "Ai剧",
+      "deliveredAt": "",
+      "duration": "",
+      "roles": [],
+      "software": [],
+      "cover": "/assets/uploads/ScreenShot_2026-10-26_142832_603.png",
+      "video": {
+        "type": "file",
+        "url": "https://portfolio-videos-1306038850.cos.ap-chengdu.myqcloud.com/%E5%8D%A7%E5%BA%95.mp4"
       },
       "summary": "",
       "background": "",
@@ -405,35 +522,18 @@
       "links": []
     },
     {
-      "title": "封狼居胥（上中下合集）",
-      "id": "fljx",
+      "title": "爷爷的饺子",
+      "id": "yydjz",
       "client": "",
       "category": "Ai剧",
       "deliveredAt": "",
       "duration": "",
       "roles": [],
       "software": [],
-      "cover": "/assets/uploads/霍去病封狼居胥.png",
-      "video": null,
-      "summary": "拉到了10w投资",
-      "background": "",
-      "approach": [],
-      "results": [],
-      "links": []
-    },
-    {
-      "title": "魔幻时代（商单）",
-      "id": "mssd",
-      "client": "",
-      "category": "商业广告",
-      "deliveredAt": "",
-      "duration": "",
-      "roles": [],
-      "software": [],
-      "cover": "",
+      "cover": "/assets/uploads/饺子.png",
       "video": {
         "type": "file",
-        "url": "https://portfolio-videos-1306038850.cos.ap-chengdu.myqcloud.com/%E9%AD%94%E5%B9%BB%E6%97%B6%E4%BB%A3.mp4"
+        "url": "https://portfolio-videos-1306038850.cos.ap-chengdu.myqcloud.com/%E7%88%B7%E7%88%B7%E7%9A%84%E9%A5%BA%E5%AD%90.mp4"
       },
       "summary": "",
       "background": "",
@@ -442,38 +542,18 @@
       "links": []
     },
     {
-      "title": "马甲一掉全球都轰动了",
-      "id": "mjyd",
-      "client": "",
-      "category": "短剧",
-      "deliveredAt": "",
-      "duration": "",
-      "roles": [],
-      "software": [],
-      "cover": "/assets/uploads/ScreenShot_2026-10-26_135505_969.png",
-      "video": {
-        "type": "file",
-        "url": "https://portfolio-videos-1306038850.cos.ap-chengdu.myqcloud.com/%E9%A9%AC%E7%94%B2%E4%B8%80%E6%8E%89%E5%85%A8%E7%90%83%E9%83%BD%E8%BD%B0%E5%8A%A8%E4%BA%86.mp4"
-      },
-      "summary": "",
-      "background": "",
-      "approach": [],
-      "results": [],
-      "links": []
-    },
-    {
-      "title": "肥婆皇后",
-      "id": "fphh",
+      "title": "上错坟，拜错人",
+      "id": "scf",
       "client": "",
       "category": "Ai剧",
       "deliveredAt": "",
       "duration": "",
       "roles": [],
       "software": [],
-      "cover": "/assets/uploads/ScreenShot_2026-10-26_140202_582.png",
+      "cover": "/assets/uploads/ScreenShot_2026-10-26_140624_166.png",
       "video": {
         "type": "file",
-        "url": "https://portfolio-videos-1306038850.cos.ap-chengdu.myqcloud.com/%E8%82%A5%E5%A9%86%E7%9A%87%E5%90%8E.mp4"
+        "url": "https://portfolio-videos-1306038850.cos.ap-chengdu.myqcloud.com/%E4%B8%8A%E9%94%99%E5%9D%9F.mp4"
       },
       "summary": "",
       "background": "",
@@ -522,46 +602,6 @@
       "links": []
     },
     {
-      "title": "龙塌换人",
-      "id": "lthr",
-      "client": "",
-      "category": "短剧",
-      "deliveredAt": "",
-      "duration": "",
-      "roles": [],
-      "software": [],
-      "cover": "/assets/uploads/ScreenShot_2026-10-26_135549_397.png",
-      "video": {
-        "type": "file",
-        "url": "https://portfolio-videos-1306038850.cos.ap-chengdu.myqcloud.com/%E6%8D%A2%E4%BA%BA.mp4"
-      },
-      "summary": "",
-      "background": "",
-      "approach": [],
-      "results": [],
-      "links": []
-    },
-    {
-      "title": "马甲一掉全球都轰动了",
-      "id": "mjyd",
-      "client": "",
-      "category": "短剧",
-      "deliveredAt": "",
-      "duration": "",
-      "roles": [],
-      "software": [],
-      "cover": "/assets/uploads/ScreenShot_2026-10-26_135505_969.png",
-      "video": {
-        "type": "file",
-        "url": "https://portfolio-videos-1306038850.cos.ap-chengdu.myqcloud.com/%E9%A9%AC%E7%94%B2%E4%B8%80%E6%8E%89%E5%85%A8%E7%90%83%E9%83%BD%E8%BD%B0%E5%8A%A8%E4%BA%86.mp4"
-      },
-      "summary": "",
-      "background": "",
-      "approach": [],
-      "results": [],
-      "links": []
-    },
-    {
       "title": "你怎么跪着和我说话",
       "id": "nzmgzhwsh",
       "client": "",
@@ -574,46 +614,6 @@
       "video": {
         "type": "file",
         "url": "https://portfolio-videos-1306038850.cos.ap-chengdu.myqcloud.com/%E4%BD%A0%E6%80%8E%E4%B9%88%E8%B7%AA%E7%9D%80%E5%92%8C%E6%88%91%E8%AF%B4%E8%AF%9D.mp4"
-      },
-      "summary": "",
-      "background": "",
-      "approach": [],
-      "results": [],
-      "links": []
-    },
-    {
-      "title": "让你卧底没让你勾引大嫂",
-      "id": "rnwd",
-      "client": "",
-      "category": "Ai剧",
-      "deliveredAt": "",
-      "duration": "",
-      "roles": [],
-      "software": [],
-      "cover": "/assets/uploads/ScreenShot_2026-10-26_142832_603.png",
-      "video": {
-        "type": "file",
-        "url": "https://portfolio-videos-1306038850.cos.ap-chengdu.myqcloud.com/%E5%8D%A7%E5%BA%95.mp4"
-      },
-      "summary": "",
-      "background": "",
-      "approach": [],
-      "results": [],
-      "links": []
-    },
-    {
-      "title": "上错坟，拜错人",
-      "id": "scf",
-      "client": "",
-      "category": "Ai剧",
-      "deliveredAt": "",
-      "duration": "",
-      "roles": [],
-      "software": [],
-      "cover": "/assets/uploads/ScreenShot_2026-10-26_140624_166.png",
-      "video": {
-        "type": "file",
-        "url": "https://portfolio-videos-1306038850.cos.ap-chengdu.myqcloud.com/%E4%B8%8A%E9%94%99%E5%9D%9F.mp4"
       },
       "summary": "",
       "background": "",
@@ -694,26 +694,6 @@
       "video": {
         "type": "file",
         "url": "https://portfolio-videos-1306038850.cos.ap-chengdu.myqcloud.com/%E9%80%83%E4%BA%A1%E9%A2%84%E5%91%8A.mp4"
-      },
-      "summary": "",
-      "background": "",
-      "approach": [],
-      "results": [],
-      "links": []
-    },
-    {
-      "title": "神级御兽师",
-      "id": "yss",
-      "client": "",
-      "category": "Ai剧",
-      "deliveredAt": "",
-      "duration": "",
-      "roles": [],
-      "software": [],
-      "cover": "/assets/uploads/ScreenShot_2026-10-26_142452_881.png",
-      "video": {
-        "type": "file",
-        "url": "https://portfolio-videos-1306038850.cos.ap-chengdu.myqcloud.com/%E5%BE%A1%E5%85%BD%E5%B8%88.mp4"
       },
       "summary": "",
       "background": "",
