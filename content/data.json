@@ -680,6 +680,46 @@
       "approach": [],
       "results": [],
       "links": []
+    },
+    {
+      "title": "逃亡预告",
+      "id": "twyg",
+      "client": "",
+      "category": "混剪",
+      "deliveredAt": "",
+      "duration": "",
+      "roles": [],
+      "software": [],
+      "cover": "/assets/uploads/ScreenShot_2026-10-26_140553_229.png",
+      "video": {
+        "type": "file",
+        "url": "https://portfolio-videos-1306038850.cos.ap-chengdu.myqcloud.com/%E9%80%83%E4%BA%A1%E9%A2%84%E5%91%8A.mp4"
+      },
+      "summary": "",
+      "background": "",
+      "approach": [],
+      "results": [],
+      "links": []
+    },
+    {
+      "title": "神级御兽师",
+      "id": "yss",
+      "client": "",
+      "category": "Ai剧",
+      "deliveredAt": "",
+      "duration": "",
+      "roles": [],
+      "software": [],
+      "cover": "/assets/uploads/ScreenShot_2026-10-26_142452_881.png",
+      "video": {
+        "type": "file",
+        "url": "https://portfolio-videos-1306038850.cos.ap-chengdu.myqcloud.com/%E5%BE%A1%E5%85%BD%E5%B8%88.mp4"
+      },
+      "summary": "",
+      "background": "",
+      "approach": [],
+      "results": [],
+      "links": []
     }
   ],
   "share": {
