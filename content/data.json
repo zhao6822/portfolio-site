@@ -14,7 +14,7 @@
       "cover": "/assets/uploads/ScreenShot_2026-10-26_121059_066.png",
       "video": {
         "type": "file",
-        "url": "https://portfolio-videos-1306038850.cos.ap-chengdu.myqcloud.com/cadl.mp4"
+        "url": "https://portfolio-videos-1306038850.cos.ap-chengdu.myqcloud.com/%E9%94%99%E7%88%B1%E5%A4%A7%E4%BD%AC.mp4"
       },
       "summary": "竞稿通过",
       "background": "",
@@ -48,7 +48,7 @@
       "links": []
     },
     {
-      "title": "废土女郎王",
+      "title": "废土女狼王（海外）",
       "id": "ftnlw",
       "client": "",
       "category": "Ai剧",
@@ -60,6 +60,26 @@
       "video": {
         "type": "file",
         "url": "https://portfolio-videos-1306038850.cos.ap-chengdu.myqcloud.com/%E6%A0%B7%E7%89%87.mp4"
+      },
+      "summary": "",
+      "background": "",
+      "approach": [],
+      "results": [],
+      "links": []
+    },
+    {
+      "title": "抢我停车位，我直接焊个铁笼",
+      "id": "qwtcw",
+      "client": "",
+      "category": "Ai剧",
+      "deliveredAt": "",
+      "duration": "",
+      "roles": [],
+      "software": [],
+      "cover": "/assets/uploads/停车位.png",
+      "video": {
+        "type": "file",
+        "url": "https://portfolio-videos-1306038850.cos.ap-chengdu.myqcloud.com/%E5%81%9C%E8%BD%A6%E4%BD%8D.mp4"
       },
       "summary": "",
       "background": "",
