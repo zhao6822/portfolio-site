@@ -12,9 +12,13 @@
  *    · 未带 / 无效 token 一律 401，绝不会把访客码列表暴露给未登录者。
  *
  *  接口：
- *    GET  /api/links                     → { ok, codes: [{code, url, createdAt, status, note}] }
- *    POST /api/links  {action:"generate"}→ { ok, code, url, commit }
+ *    GET  /api/links                          → { ok, codes: [{code, url, createdAt, status, note}] }
+ *    POST /api/links  {action:"generate"}     → { ok, code, url, commit }
+ *    POST /api/links  {action:"custom", code:"XXXX"} → { ok, code, url, commit }
  *    POST /api/links  {action:"revoke", code:"XXXX"} → { ok, revoked, commit }
+ *
+ *  custom（自定义访客码）：校验 4-16 位、仅字母数字，自动转大写，且不与现有
+ *  有效码重复；通过校验后写入 site.accessCodes 与 accessCodeMeta 并提交推送。
  *
  *  数据流：直接修改 content/data.json 的 site.accessCodes（数组）并新增/更新
  *          site.accessCodeMeta（code → {createdAt, status, note}）记录，然后
@@ -142,6 +146,18 @@ function generateCode(existingCodes) {
   throw new Error("生成访客码失败：连续 50 次未得到唯一码，请重试");
 }
 
+/* 规范化自定义访客码：转大写 + 校验长度 4-16、仅字母数字 */
+function normalizeCustomCode(raw) {
+  const code = String(raw || "").trim().toUpperCase();
+  if (code.length < 4 || code.length > 16) {
+    return { error: "自定义访客码长度需为 4-16 位（当前 " + code.length + " 位）" };
+  }
+  if (!/^[A-Z0-9]+$/.test(code)) {
+    return { error: "自定义访客码只能包含字母和数字（提交时自动转为大写）" };
+  }
+  return { code: code };
+}
+
 /* 组装当前有效访客码列表 */
 function buildCodeList(data, origin) {
   const codes = Array.isArray(data.site && data.site.accessCodes)
@@ -219,8 +235,8 @@ export async function onRequestPost({ request, env }) {
   }
   const action = body && body.action;
 
-  if (action !== "generate" && action !== "revoke") {
-    return jsonResponse(400, { ok: false, error: "未知操作：action 仅支持 generate / revoke" });
+  if (action !== "generate" && action !== "custom" && action !== "revoke") {
+    return jsonResponse(400, { ok: false, error: "未知操作：action 仅支持 generate / custom / revoke" });
   }
 
   try {
@@ -249,6 +265,28 @@ export async function onRequestPost({ request, env }) {
         status: "active"
       };
       const message = "chore(access): 新增访客链接 " + code;
+      const commit = await saveDataFile(token, data, message);
+      result = { ok: true, code: code, url: origin + "/?visit=" + encodeURIComponent(code), commit: commit };
+    } else if (action === "custom") {
+      // 自定义访客码：规范化校验 → 查重 → 写入 accessCodes 与 accessCodeMeta → 提交推送
+      const norm = normalizeCustomCode(body && body.code);
+      if (norm.error) {
+        return jsonResponse(400, { ok: false, error: norm.error });
+      }
+      const code = norm.code;
+      const exists = data.site.accessCodes.some(function (c) {
+        return String(c).trim().toUpperCase() === code;
+      });
+      if (exists) {
+        return jsonResponse(409, { ok: false, error: "访客码 " + code + " 已在列表中，请换一个" });
+      }
+      data.site.accessCodes.push(code);
+      data.site.accessCodeMeta[code] = {
+        createdAt: new Date().toISOString(),
+        status: "active",
+        note: "自定义码"
+      };
+      const message = "chore(access): 新增自定义访客链接 " + code;
       const commit = await saveDataFile(token, data, message);
       result = { ok: true, code: code, url: origin + "/?visit=" + encodeURIComponent(code), commit: commit };
     } else {

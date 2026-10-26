@@ -67,12 +67,27 @@
     .new-link { background: #0f172a; border: 1px dashed #2563eb; border-radius: 8px; padding: 12px 14px; margin-top: 12px; word-break: break-all; }
     .new-link a { color: #7dd3fc; font-weight: 600; }
     .copied-hint { color: #86efac; font-size: 12px; margin-left: 8px; }
+    .gen-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .custom-row {
+      display: flex; align-items: center; gap: 10px;
+      margin-top: 14px; padding-top: 14px; border-top: 1px dashed #334155;
+      flex-wrap: wrap;
+    }
+    .custom-row input {
+      flex: 1; min-width: 220px;
+      border: 1px solid #475569; border-radius: 8px;
+      background: #0f172a; color: #e2e8f0;
+      font-size: 14px; font-family: ui-monospace, Consolas, monospace;
+      letter-spacing: 1px; padding: 10px 12px; outline: none;
+    }
+    .custom-row input:focus { border-color: #2563eb; }
+    .custom-row input::placeholder { color: #64748b; font-family: system-ui, sans-serif; letter-spacing: 0; }
   </style>
 </head>
 <body>
   <div class="wrap">
     <h1>访客链接管理</h1>
-    <p class="sub">生成 / 收回本站临时访客链接。改动推送到 GitHub 后，Cloudflare 自动构建约 1-2 分钟生效。</p>
+    <p class="sub">生成 / 自定义 / 收回本站访客链接。改动推送到 GitHub 后，Cloudflare 自动构建约 1-2 分钟生效。</p>
 
     <div id="alertBox"></div>
 
@@ -86,8 +101,15 @@
     <!-- 已登录视图 -->
     <div id="mainView" style="display:none">
       <div class="card">
-        <button id="generateBtn" class="btn primary">生成新访客链接</button>
-        <span class="muted" style="margin-left:12px">每次生成随机 8 位访问码，追加进站点访客码列表并自动提交推送</span>
+        <div class="gen-row">
+          <button id="generateBtn" class="btn primary">生成新访客链接</button>
+          <span class="muted">每次生成随机 8 位访问码，追加进站点访客码列表并自动提交推送</span>
+        </div>
+        <div class="custom-row">
+          <input id="customCode" type="text" maxlength="16" placeholder="输入自定义访客码（4-16 位字母或数字，自动转大写）" autocomplete="off" />
+          <button id="customBtn" class="btn">添加自定义访客码</button>
+          <span class="muted">自定义码按你指定的内容写入访客码列表并自动提交推送，同样约 1-2 分钟生效</span>
+        </div>
       </div>
 
       <div class="card">
@@ -320,9 +342,41 @@
         });
       }
 
+      function addCustom() {
+        var input = document.getElementById("customCode");
+        var raw = input.value.trim();
+        if (!raw) {
+          setAlert("err", "请输入要添加的自定义访客码");
+          input.focus();
+          return;
+        }
+        var btn = document.getElementById("customBtn");
+        btn.disabled = true;
+        clearAlert();
+        apiCall("/api/links", { method: "POST", body: { action: "custom", code: raw } }).then(function (res) {
+          btn.disabled = false;
+          if (!res.ok) {
+            setAlert("err", res.error || "添加失败");
+            return;
+          }
+          input.value = "";
+          var box =
+            '<div class="alert ok">已添加自定义访客码 <strong>' + escapeHtml(res.code) + '</strong>，并推送到 GitHub：</div>' +
+            '<div class="new-link"><a href="' + escapeAttr(res.url) + '" target="_blank" rel="noopener">' +
+            escapeHtml(res.url) + "</a></div>";
+          alertBox.innerHTML = box;
+          deployHint.style.display = "block";
+          loadCodes();
+        });
+      }
+
       /* ---------- 初始化 ---------- */
       document.getElementById("loginBtn").addEventListener("click", startLogin);
       document.getElementById("generateBtn").addEventListener("click", generate);
+      document.getElementById("customBtn").addEventListener("click", addCustom);
+      document.getElementById("customCode").addEventListener("keydown", function (e) {
+        if (e.key === "Enter") addCustom();
+      });
 
       if (token()) {
         showMain();
