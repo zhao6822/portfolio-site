@@ -39,8 +39,11 @@ export async function onRequest(context) {
     return next();
   }
 
-  /* ② 静态资源放行（页面依赖的 JS / CSS / 图片 / 视频 / 字体等） */
-  if (STATIC_EXT_PATTERN.test(path)) {
+  /* ①.5 敏感数据文件（作品数据、访客码清单）不得裸放行，必须通过访问门校验 */
+  const PROTECTED_DATA = /^\/(assets\/js\/data\.js|access\.json)$/i;
+
+  /* ② 静态资源放行（页面依赖的 JS / CSS / 图片 / 视频 / 字体等；敏感数据除外） */
+  if (!PROTECTED_DATA.test(path) && STATIC_EXT_PATTERN.test(path)) {
     return next();
   }
 
