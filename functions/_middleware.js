@@ -42,27 +42,27 @@ export async function onRequest(context) {
     return next();
   }
 
-  /* ①.4 中间件内部读取 access.json 专用放行（令牌校验，外部不可伪造） */
+  /* ①.4 中间件内部读取数据文件专用放行（令牌校验，外部不可伪造） */
   if (
-    path === "/access.json" &&
+    (path === "/access.json" || path === "/content/data.json") &&
     request.headers.get("X-Access-Internal") === INTERNAL_ACCESS_TOKEN
   ) {
     return next();
   }
 
   /* ①.5 敏感数据文件（作品数据、访客码清单）不得裸放行，必须通过访问门校验 */
-  const PROTECTED_DATA = /^\/(assets\/js\/data\.js|access\.json)$/i;
+  const PROTECTED_DATA = /^\/(assets\/js\/data\.js|access\.json|content\/data\.json)$/i;
 
   /* ② 静态资源放行（页面依赖的 JS / CSS / 图片 / 视频 / 字体等；敏感数据除外） */
   if (!PROTECTED_DATA.test(path) && STATIC_EXT_PATTERN.test(path)) {
     return next();
   }
 
-  /* ③ 社交爬虫放行（分享卡片 og 标签可被微信 / QQ / FB / Twitter 抓取） */
+  /* ③ 社交爬虫识别（微信 / QQ / FB / Twitter 等）：不再直接放行真实页面，
+    仅标记 isSocialBot——若未通过凭据校验，只返回不含正文的分享预览壳，
+    保证转发分享时 og 卡片可被抓取，但拿不到任何真实内容 */
   const ua = request.headers.get("user-agent") || "";
-  if (SOCIAL_UA_PATTERN.test(ua)) {
-    return next();
-  }
+  const isSocialBot = SOCIAL_UA_PATTERN.test(ua);
 
   /* ④ 已通过校验的会话（Cookie）放行 */
   if (parseCookies(request.headers.get("cookie"))[COOKIE_NAME] === "1") {
@@ -109,7 +109,18 @@ export async function onRequest(context) {
     }
   }
 
-  /* ⑦ 其余请求：403 无权访问 */
+  /* ⑦ 其余请求：未通过凭据校验。
+     - 社交爬虫：返回 200 分享预览壳（仅 og 标签，不含任何正文/数据）
+     - 其他请求：403 无权访问 */
+  if (isSocialBot) {
+    return new Response(previewShellHtml(), {
+      status: 200,
+      headers: {
+        "Content-Type": "text/html; charset=utf-8",
+        "Cache-Control": "no-store",
+      },
+    });
+  }
   return new Response(unauthorizedHtml(url), {
     status: 403,
     headers: {
@@ -130,6 +141,26 @@ function parseCookies(header) {
     if (k) out[k] = v;
   });
   return out;
+}
+
+/* 分享预览壳：仅含 og 标签，供社交爬虫抓取分享卡片；不含任何正文与数据 */
+function previewShellHtml() {
+  return (
+    "<!DOCTYPE html>\n" +
+    '<html lang="zh-CN">\n' +
+    "<head>\n" +
+    '  <meta charset="utf-8">\n' +
+    '  <meta name="viewport" content="width=device-width, initial-scale=1">\n' +
+    '  <meta property="og:title" content="赵鹏 · 作品集 — 无限进步">\n' +
+    '  <meta property="og:description" content="赵鹏的作品集，访问需授权。">\n' +
+    '  <meta property="og:type" content="website">\n' +
+    '  <meta property="og:image" content="https://portfolio-site-7i5.pages.dev/assets/images/og-cover.png">\n' +
+    '  <meta name="twitter:card" content="summary_large_image">\n' +
+    "  <title>赵鹏 · 作品集</title>\n" +
+    "</head>\n" +
+    "<body></body>\n" +
+    "</html>"
+  );
 }
 
 function unauthorizedHtml(url) {
