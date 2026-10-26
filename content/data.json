@@ -420,6 +420,26 @@
       "approach": [],
       "results": [],
       "links": []
+    },
+    {
+      "title": "魔幻时代（商单）",
+      "id": "mssd",
+      "client": "",
+      "category": "商业广告",
+      "deliveredAt": "",
+      "duration": "",
+      "roles": [],
+      "software": [],
+      "cover": "",
+      "video": {
+        "type": "file",
+        "url": "https://portfolio-videos-1306038850.cos.ap-chengdu.myqcloud.com/%E9%AD%94%E5%B9%BB%E6%97%B6%E4%BB%A3.mp4"
+      },
+      "summary": "",
+      "background": "",
+      "approach": [],
+      "results": [],
+      "links": []
     }
   ],
   "share": {
