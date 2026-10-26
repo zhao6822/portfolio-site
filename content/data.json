@@ -70,7 +70,10 @@
       "roles": [],
       "software": [],
       "cover": "/assets/uploads/霍去病封狼居胥.png",
-      "video": null,
+      "video": {
+        "type": "file",
+        "url": "https://portfolio-videos-1306038850.cos.ap-chengdu.myqcloud.com/%E9%9C%8D%E5%8E%BB%E7%97%85%E5%B0%81%E7%8B%BC%E5%B1%85%E8%83%A5.mp4"
+      },
       "summary": "拉到了10w投资",
       "background": "",
       "approach": [],
@@ -310,10 +313,10 @@
       "duration": "",
       "roles": [],
       "software": [],
-      "cover": "/assets/uploads/pasted-image-1792854776982.png",
+      "cover": "",
       "video": {
         "type": "file",
-        "url": "https://portfolio-videos-1306038850.cos.ap-chengdu.myqcloud.com/%E6%A0%B7%E7%89%87.mp4"
+        "url": "https://portfolio-videos-1306038850.cos.ap-chengdu.myqcloud.com/%E5%BA%9F%E5%9C%9F%E5%A5%B3%E7%8B%BC%E7%8E%8B.mp4"
       },
       "summary": "",
       "background": "",
