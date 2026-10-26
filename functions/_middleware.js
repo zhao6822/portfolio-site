@@ -69,7 +69,7 @@ export async function onRequest(context) {
   const ownerKey = env.OWNER_KEY || "";
   const owner = (url.searchParams.get("owner") || "").trim();
   if (ownerKey && owner && owner === ownerKey) {
-    return next();
+    return passHtmlCredential(await next(), "owner", owner);
   }
 
   /* ⑥ 访客临时码：?visit= 命中 access.json 的 accessCodes 数组任意一项 */
@@ -87,7 +87,7 @@ export async function onRequest(context) {
             return String(code).trim() === visit;
           })
         ) {
-          return next();
+          return passHtmlCredential(await next(), "visit", visit);
         }
       }
     } catch (err) {
@@ -178,4 +178,33 @@ function escapeAttr(value) {
     .replace(/"/g, "&quot;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;");
+}
+
+/* 凭据透传：HTML 页面内的 data.js 引用会被改写为带当前凭据参数的地址，
+   保证页面进入后浏览器请求 data.js 时携带有效参数、不被访问门 403 拦截。
+   仅处理 text/html 响应，其余响应原样返回。 */
+async function passHtmlCredential(response, key, value) {
+  if (!response) return response;
+  const contentType = response.headers.get("Content-Type") || "";
+  if (!/text\/html/i.test(contentType)) return response;
+
+  const html = await response.text();
+  const token = encodeURIComponent(value);
+  const rewritten = html.replace(
+    /(<script\b[^>]*\bsrc\s*=\s*["'])(\/?)(assets\/js\/data\.js)(["'])/gi,
+    function (match, pre, slash, path, post) {
+      return pre + slash + path + "?" + key + "=" + token + post;
+    }
+  );
+
+  if (rewritten === html) return response;
+
+  const newHeaders = new Headers(response.headers);
+  newHeaders.delete("content-length");
+  newHeaders.delete("content-encoding");
+
+  return new Response(rewritten, {
+    status: response.status,
+    headers: newHeaders,
+  });
 }
