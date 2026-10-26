@@ -61,8 +61,36 @@
     return match ? decodeURIComponent(match[1].replace(/\+/g, " ")) : "";
   }
 
+  /* 当前访问凭据（visit / owner 二选一）：进入页面后记住，用于站内跳转透传，
+     避免严格模式下每次跳转详情页 / 时间线都要重新输入访问码。
+     为空时（无凭据进入）不做任何透传。 */
+  var CRED = (function () {
+    var v = getParam("visit");
+    if (v) return "visit=" + encodeURIComponent(v);
+    var o = getParam("owner");
+    if (o) return "owner=" + encodeURIComponent(o);
+    return "";
+  })();
+
   function workUrl(id) {
-    return "project.html?id=" + encodeURIComponent(id);
+    return "project.html?id=" + encodeURIComponent(id) + (CRED ? "&" + CRED : "");
+  }
+
+  /* 站内页面链接透传凭据：给所有指向本站 .html 页面的相对链接追加当前凭据参数。
+     - 跳过外部链接（http://、//、mailto:、tel: 等）与页内锚点（#）；
+     - 已带 visit/owner 参数的链接不重复追加；
+     - 动态渲染产生的链接由 workUrl() 直接带参数，这里兜底处理静态与模板链接。 */
+  function decorateLinks() {
+    if (!CRED) return;
+    var links = document.querySelectorAll("a[href]");
+    Array.prototype.forEach.call(links, function (a) {
+      var href = a.getAttribute("href") || "";
+      if (!href || /^[a-z]+:/i.test(href) || href.indexOf("//") === 0 || href.charAt(0) === "#") return;
+      if (!/\.html($|\?)/i.test(href)) return;
+      if (/(^|[?&])(visit|owner)=/i.test(href)) return;
+      var sep = href.indexOf("?") >= 0 ? "&" : "?";
+      a.setAttribute("href", href + sep + CRED);
+    });
   }
 
   function linkTarget(url) {
@@ -648,6 +676,8 @@
     if (page && typeof App[page] === "function") {
       App[page]();
     }
+    /* 页面渲染完成后统一透传凭据到站内链接（含刚渲染出的模板链接） */
+    decorateLinks();
   }
 
   if (document.readyState === "loading") {
