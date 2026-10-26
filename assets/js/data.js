@@ -68,10 +68,6 @@ window.PORTFOLIO_DATA = {
     "image": "assets/images/og-cover.png"
   },
   "categories": [
-    "Ai短剧",
-    "真人短剧",
-    "纪录片",
-    "预告",
     "混剪",
     "短剧",
     "Ai剧"
