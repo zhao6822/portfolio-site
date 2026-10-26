@@ -315,7 +315,6 @@
         heroMedia.innerHTML =
           '<div class="connect-card">' +
             '<div class="connect-head"><strong>和我建联</strong><span>有合作直接找我</span></div>' +
-            '<div class="connect-qr"><img src="assets/uploads/wechat-qr.png" alt="微信二维码" loading="lazy"><span>扫码加微信</span></div>' +
             connect +
             (linkHtml ? '<div class="connect-links">' + linkHtml + "</div>" : "") +
           "</div>";
