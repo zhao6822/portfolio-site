@@ -7,12 +7,12 @@
  *      卡片 og 标签可被抓取；
  *    · 放行静态资源（js / css / 图片 / 视频 / 字体等）；
  *    · 管理员：URL query 的 owner 参数与 Cloudflare 环境变量 OWNER_KEY
- *      比对，匹配则放行并种 30 天免码 Cookie（OWNER_KEY 由用户在
- *      Cloudflare 面板配置 Secret，绝不写入仓库）；
+ *      比对，匹配则放行（OWNER_KEY 由用户在 Cloudflare 面板配置
+ *      Secret，绝不写入仓库）；
  *    · 访客：URL query 的 visit 参数命中 access.json 中 accessCodes 数组
- *      任意一个即放行并种 Cookie；
- *    · 已通过校验（携带 Cookie）的请求放行；
- *    · 其余页面请求返回 403「无权访问」。
+ *      任意一个即放行；
+ *    · 无有效凭据（owner / visit）的页面请求一律返回 403「无权访问」；
+ *      不种 Cookie、不记住身份，每次访问都必须带有效参数。
  *  访客码来源：构建产物 access.json（由 build.js 依据
  *              content/data.json 的 site.accessCodes 生成）。
  */
@@ -29,8 +29,6 @@ const STATIC_EXT_PATTERN =
 const INTERNAL_ACCESS_TOKEN = "ia-tok-7f3k2v9q";
 
 const ADMIN_PREFIX = "/admin";
-const COOKIE_NAME = "site_visit_ok";
-const COOKIE_MAX_AGE = 60 * 60 * 24 * 30; /* 30 天 */
 
 export async function onRequest(context) {
   const { request, env, next } = context;
@@ -64,21 +62,14 @@ export async function onRequest(context) {
   const ua = request.headers.get("user-agent") || "";
   const isSocialBot = SOCIAL_UA_PATTERN.test(ua);
 
-  /* ④ 已通过校验的会话（Cookie）放行 */
-  if (parseCookies(request.headers.get("cookie"))[COOKIE_NAME] === "1") {
-    return next();
-  }
+  /* ④（已移除）严格模式：不种免码 Cookie，也不接受 Cookie 放行，
+    每次访问都必须携带有效 ?owner= 或 ?visit= 参数 */
 
   /* ⑤ 管理员钥匙：?owner= 与 Cloudflare 环境变量 OWNER_KEY 比对 */
   const ownerKey = env.OWNER_KEY || "";
   const owner = (url.searchParams.get("owner") || "").trim();
   if (ownerKey && owner && owner === ownerKey) {
-    const resp = await next();
-    resp.headers.append(
-      "Set-Cookie",
-      COOKIE_NAME + "=1; Path=/; Max-Age=" + COOKIE_MAX_AGE + "; SameSite=Lax"
-    );
-    return resp;
+    return next();
   }
 
   /* ⑥ 访客临时码：?visit= 命中 access.json 的 accessCodes 数组任意一项 */
@@ -96,12 +87,7 @@ export async function onRequest(context) {
             return String(code).trim() === visit;
           })
         ) {
-          const resp = await next();
-          resp.headers.append(
-            "Set-Cookie",
-            COOKIE_NAME + "=1; Path=/; Max-Age=" + COOKIE_MAX_AGE + "; SameSite=Lax"
-          );
-          return resp;
+          return next();
         }
       }
     } catch (err) {
@@ -128,19 +114,6 @@ export async function onRequest(context) {
       "Cache-Control": "no-store",
     },
   });
-}
-
-function parseCookies(header) {
-  const out = {};
-  if (!header) return out;
-  header.split(";").forEach(function (part) {
-    const idx = part.indexOf("=");
-    if (idx === -1) return;
-    const k = part.slice(0, idx).trim();
-    const v = part.slice(idx + 1).trim();
-    if (k) out[k] = v;
-  });
-  return out;
 }
 
 /* 分享预览壳：仅含 og 标签，供社交爬虫抓取分享卡片；不含任何正文与数据 */
