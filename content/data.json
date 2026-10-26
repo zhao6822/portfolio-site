@@ -86,6 +86,86 @@
       "approach": [],
       "results": [],
       "links": []
+    },
+    {
+      "title": "关云长",
+      "id": "gyc",
+      "client": "",
+      "category": "Ai剧",
+      "deliveredAt": "",
+      "duration": "",
+      "roles": [],
+      "software": [],
+      "cover": "/assets/uploads/岳飞、.png",
+      "video": {
+        "type": "file",
+        "url": "https://portfolio-videos-1306038850.cos.ap-chengdu.myqcloud.com/%E5%85%B3%E4%BA%91%E9%95%BF.mp4"
+      },
+      "summary": "",
+      "background": "",
+      "approach": [],
+      "results": [],
+      "links": []
+    },
+    {
+      "title": "免费奇谭",
+      "id": "mfqt",
+      "client": "",
+      "category": "Ai剧",
+      "deliveredAt": "",
+      "duration": "",
+      "roles": [],
+      "software": [],
+      "cover": "/assets/uploads/免费奇谭.png",
+      "video": {
+        "type": "file",
+        "url": "https://portfolio-videos-1306038850.cos.ap-chengdu.myqcloud.com/%E5%85%8D%E8%B4%B9%E5%A5%87%E8%B0%AD.mp4"
+      },
+      "summary": "",
+      "background": "",
+      "approach": [],
+      "results": [],
+      "links": []
+    },
+    {
+      "title": "剪刀婆婆不剪梦了",
+      "id": "jdpp",
+      "client": "",
+      "category": "",
+      "deliveredAt": "",
+      "duration": "",
+      "roles": [],
+      "software": [],
+      "cover": "/assets/uploads/ScreenShot_2026-10-26_121556_923.png",
+      "video": {
+        "type": "file",
+        "url": "https://portfolio-videos-1306038850.cos.ap-chengdu.myqcloud.com/%E5%89%AA%E5%88%80%E5%A9%86%E5%A9%86.mp4"
+      },
+      "summary": "",
+      "background": "",
+      "approach": [],
+      "results": [],
+      "links": []
+    },
+    {
+      "title": "埃及王（海外）",
+      "id": "ajw",
+      "client": "",
+      "category": "",
+      "deliveredAt": "",
+      "duration": "",
+      "roles": [],
+      "software": [],
+      "cover": "/assets/uploads/埃及王.png",
+      "video": {
+        "type": "file",
+        "url": "https://portfolio-videos-1306038850.cos.ap-chengdu.myqcloud.com/%E5%9F%83%E5%8F%8A%E7%8E%8B.mp4"
+      },
+      "summary": "",
+      "background": "",
+      "approach": [],
+      "results": [],
+      "links": []
     }
   ],
   "share": {
