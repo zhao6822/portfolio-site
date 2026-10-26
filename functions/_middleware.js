@@ -96,10 +96,11 @@ export async function onRequest(context) {
   }
 
   /* ⑦ 其余请求：未通过凭据校验。
-     - 社交爬虫：返回 200 分享预览壳（仅 og 标签，不含任何正文/数据）
-     - 其他请求：403 无权访问 */
+     - 社交爬虫 / 微信内置浏览器：返回 200 的「访问码表单页」（内含 og 标签，
+       微信转发时爬虫可抓取分享卡片，微信内真实用户打开则能看到输码表单）；
+     - 其他请求：403 无权访问（同样带表单与 og 标签，方便复制链接到浏览器输码） */
   if (isSocialBot) {
-    return new Response(previewShellHtml(), {
+    return new Response(unauthorizedHtml(url), {
       status: 200,
       headers: {
         "Content-Type": "text/html; charset=utf-8",
@@ -116,8 +117,7 @@ export async function onRequest(context) {
   });
 }
 
-/* 分享预览壳：仅含 og 标签，供社交爬虫抓取分享卡片；不含任何正文与数据 */
-function previewShellHtml() {
+function unauthorizedHtml(url) {
   return (
     "<!DOCTYPE html>\n" +
     '<html lang="zh-CN">\n' +
@@ -129,20 +129,6 @@ function previewShellHtml() {
     '  <meta property="og:type" content="website">\n' +
     '  <meta property="og:image" content="https://portfolio-site-7i5.pages.dev/assets/images/og-cover.png">\n' +
     '  <meta name="twitter:card" content="summary_large_image">\n' +
-    "  <title>赵鹏 · 作品集</title>\n" +
-    "</head>\n" +
-    "<body></body>\n" +
-    "</html>"
-  );
-}
-
-function unauthorizedHtml(url) {
-  return (
-    "<!DOCTYPE html>\n" +
-    '<html lang="zh-CN">\n' +
-    "<head>\n" +
-    '  <meta charset="utf-8">\n' +
-    '  <meta name="viewport" content="width=device-width, initial-scale=1">\n' +
     "  <title>无权访问</title>\n" +
     "  <style>\n" +
     "    body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#111827;color:#e5e7eb;font-family:'PingFang SC','Microsoft YaHei',sans-serif;}\n" +
