@@ -178,6 +178,50 @@ h1, h2, h3, h4 { line-height: 1.3; color: #fff; margin: 0 0 12px; }
 .showreel-info strong { font-size: 15px; }
 .showreel-info span { color: var(--muted); font-size: 13px; }
 
+/* ---------------- 首页 Hero 建联卡片 ---------------- */
+.connect-card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.015));
+  padding: 26px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.connect-head { display: flex; flex-direction: column; gap: 4px; margin-bottom: 6px; }
+.connect-head strong { font-size: 19px; color: #fff; }
+.connect-head span { font-size: 13px; color: var(--muted); }
+.connect-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 0;
+  border-top: 1px solid var(--line);
+}
+.connect-label { flex: 0 0 46px; font-size: 13px; color: var(--muted); }
+.connect-value { flex: 1 1 auto; font-size: 14px; color: #fff; word-break: break-all; }
+.connect-copy {
+  flex: 0 0 auto;
+  font-size: 12px;
+  padding: 4px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--accent);
+  cursor: pointer;
+}
+.connect-copy:hover { background: var(--accent-dim); }
+.connect-links { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 8px; }
+.connect-link {
+  font-size: 13px;
+  color: var(--accent);
+  text-decoration: none;
+  padding: 6px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+}
+.connect-link:hover { background: var(--accent-dim); }
+
 /* ---------------- 播放器（点击封面后加载） ---------------- */
 .player {
   position: relative;
