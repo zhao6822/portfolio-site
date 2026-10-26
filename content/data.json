@@ -70,7 +70,10 @@
       "roles": [],
       "software": [],
       "cover": "/assets/uploads/ScreenShot_2026-10-26_111301_976.png",
-      "video": null,
+      "video": {
+        "type": "file",
+        "url": "https://portfolio-videos-1306038850.cos.ap-chengdu.myqcloud.com/%E6%88%91%E7%9A%84%E6%B5%81%E6%B5%AA%E4%BF%9D%E9%95%96%E7%AB%9F%E6%98%AF%E5%85%A8%E5%A2%83%E7%8B%BC%E7%8E%8B.mp4"
+      },
       "summary": "",
       "background": "",
       "approach": [],
