@@ -295,15 +295,6 @@
           }).join("") + "</div>";
       }
 
-      if (heroMedia) {
-        var sr = PROFILE.showreel || {};
-        heroMedia.innerHTML =
-          playerHtml(sr.video, sr.cover, "showreel", sr.title || "Showreel", sr.hint) +
-          '<div class="showreel-info">' +
-            "<strong>" + esc(sr.title || "Showreel") + "</strong>" +
-            "<span>" + esc(sr.subtitle || "") + (sr.duration ? " · " + esc(sr.duration) : "") + "</span>" +
-          "</div>";
-      }
 
       /* 类型筛选 */
       var bar = $("filterBar");
