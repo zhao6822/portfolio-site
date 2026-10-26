@@ -141,6 +141,33 @@
       "links": []
     },
     {
+      "title": "错爱大佬（海外）",
+      "id": "cuoaidalao",
+      "client": "",
+      "category": "短视频",
+      "deliveredAt": "",
+      "duration": "",
+      "roles": [
+        ""
+      ],
+      "software": [],
+      "cover": "/assets/uploads/ScreenShot_2026-10-26_121059_066.png",
+      "video": {
+        "type": "file",
+        "url": "https://portfolio-videos-1306038850.cos.ap-chengdu.myqcloud.com/%E9%94%99%E7%88%B1%E5%A4%A7%E4%BD%AC.mp4"
+      },
+      "summary": "竞稿通过",
+      "background": "",
+      "approach": [],
+      "results": [],
+      "links": [
+        {
+          "label": "",
+          "url": ""
+        }
+      ]
+    },
+    {
       "title": "免费奇谭",
       "id": "mfqt",
       "client": "",
@@ -179,33 +206,6 @@
       "approach": [],
       "results": [],
       "links": []
-    },
-    {
-      "title": "错爱大佬（海外）",
-      "id": "cuoaidalao",
-      "client": "",
-      "category": "短视频",
-      "deliveredAt": "2026-04",
-      "duration": "",
-      "roles": [
-        ""
-      ],
-      "software": [],
-      "cover": "/assets/uploads/ScreenShot_2026-10-26_121059_066.png",
-      "video": {
-        "type": "file",
-        "url": "https://portfolio-videos-1306038850.cos.ap-chengdu.myqcloud.com/%E9%94%99%E7%88%B1%E5%A4%A7%E4%BD%AC.mp4"
-      },
-      "summary": "竞稿通过",
-      "background": "",
-      "approach": [],
-      "results": [],
-      "links": [
-        {
-          "label": "",
-          "url": ""
-        }
-      ]
     },
     {
       "title": "龙场悟道",
@@ -312,7 +312,7 @@
       "id": "ftnlw",
       "client": "",
       "category": "Ai剧",
-      "deliveredAt": "2026-09",
+      "deliveredAt": "",
       "duration": "",
       "roles": [],
       "software": [],
