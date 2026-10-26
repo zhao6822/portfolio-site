@@ -963,10 +963,16 @@
       "XX35A66R": {
         "createdAt": "2026-10-19T06:02:52.691Z",
         "status": "active"
+      },
+      "FENGYE": {
+        "createdAt": "2026-10-26T11:14:44.935Z",
+        "status": "active",
+        "note": "自定义码"
       }
     },
     "accessCodes": [
-      "XX35A66R"
+      "XX35A66R",
+      "FENGYE"
     ],
     "ownerNote": "管理员钥匙由 Cloudflare 环境变量 OWNER_KEY 配置（不入仓库），本站只存访客临时码 accessCodes；accessCodeMeta 记录每个访客码的生成时间与状态（由 /admin/links 管理页维护）"
   }
