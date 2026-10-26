@@ -296,6 +296,53 @@
       }
 
 
+      if (heroMedia) {
+        var pf = PROFILE;
+        var connect = "";
+        function contactRow(label, value) {
+          return '<div class="connect-row"><span class="connect-label">' + esc(label) + "</span>" +
+            '<span class="connect-value">' + esc(value) + "</span>" +
+            '<button type="button" class="connect-copy" data-copy="' + esc(value) + '">复制</button></div>';
+        }
+        if (pf.wechat) connect += contactRow("微信", pf.wechat);
+        if (pf.email) connect += contactRow("邮箱", pf.email);
+        if (pf.phone) connect += contactRow("电话", pf.phone);
+        if (pf.location) connect += contactRow("坐标", pf.location);
+        var links = (pf.links || []).filter(function (l) { return l && l.url; });
+        var linkHtml = links.map(function (l) {
+          return '<a class="connect-link" href="' + esc(l.url) + '" target="_blank" rel="noopener">' + esc(l.label || "我的主页") + "</a>";
+        }).join("");
+        heroMedia.innerHTML =
+          '<div class="connect-card">' +
+            '<div class="connect-head"><strong>和我建联</strong><span>有合作直接找我</span></div>' +
+            connect +
+            (linkHtml ? '<div class="connect-links">' + linkHtml + "</div>" : "") +
+          "</div>";
+        heroMedia.addEventListener("click", function (e) {
+          var btn = e.target.closest ? e.target.closest(".connect-copy") : null;
+          if (!btn) return;
+          var val = btn.getAttribute("data-copy") || "";
+          function done() {
+            var old = btn.textContent;
+            btn.textContent = "已复制";
+            setTimeout(function () { btn.textContent = old; }, 1600);
+          }
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(val).then(done, function () { done(); });
+          } else {
+            var ta = document.createElement("textarea");
+            ta.value = val;
+            ta.style.position = "fixed";
+            ta.style.opacity = "0";
+            document.body.appendChild(ta);
+            ta.select();
+            try { document.execCommand("copy"); } catch (err) {}
+            document.body.removeChild(ta);
+            done();
+          }
+        });
+      }
+
       /* 类型筛选 */
       var bar = $("filterBar");
       if (bar) {
