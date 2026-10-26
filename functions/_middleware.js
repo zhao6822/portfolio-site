@@ -25,6 +25,9 @@ const SOCIAL_UA_PATTERN =
 const STATIC_EXT_PATTERN =
   /\.(js|css|json|png|jpe?g|webp|gif|svg|ico|avif|mp4|webm|ogv|mp3|wav|m4a|woff2?|ttf|otf|eot|pdf|zip|map)$/i;
 
+/* 中间件内部读取 access.json 的专用令牌（外部请求无法伪造） */
+const INTERNAL_ACCESS_TOKEN = "ia-tok-7f3k2v9q";
+
 const ADMIN_PREFIX = "/admin";
 const COOKIE_NAME = "site_visit_ok";
 const COOKIE_MAX_AGE = 60 * 60 * 24 * 30; /* 30 天 */
@@ -36,6 +39,14 @@ export async function onRequest(context) {
 
   /* ① 后台与 API 放行（OAuth 回调、CMS 资源不受访问门影响） */
   if (path === ADMIN_PREFIX || path.startsWith(ADMIN_PREFIX + "/") || path.startsWith("/api/")) {
+    return next();
+  }
+
+  /* ①.4 中间件内部读取 access.json 专用放行（令牌校验，外部不可伪造） */
+  if (
+    path === "/access.json" &&
+    request.headers.get("X-Access-Internal") === INTERNAL_ACCESS_TOKEN
+  ) {
     return next();
   }
 
@@ -74,7 +85,9 @@ export async function onRequest(context) {
   const visit = (url.searchParams.get("visit") || "").trim();
   if (visit) {
     try {
-      const accessResp = await fetch(new URL("/access.json", url).toString());
+      const accessResp = await fetch(new URL("/access.json", url).toString(), {
+        headers: { "X-Access-Internal": INTERNAL_ACCESS_TOKEN },
+      });
       if (accessResp.ok) {
         const access = await accessResp.json();
         const codes = Array.isArray(access.accessCodes) ? access.accessCodes : [];
